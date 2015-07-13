@@ -59,8 +59,10 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.collider.CompareTag(FLOOR) && (col.contacts[0].normal.y == 1) || col.contacts[1].normal.y == 1)
+        if (col.collider.CompareTag(FLOOR) && 
+            (col.contacts[0].normal.y == 1) || col.contacts[1].normal.y == 1)
         {
+            mInAir = false;
             Debug.Log("Anims and shits here");
             // Play landing sound here, ONCE !
         }
@@ -113,11 +115,6 @@ public class Player : MonoBehaviour
     // Make the character jump
     private void Jump()
     {
-        if (mBody.velocity.y == 0)
-        {
-            mInAir = false;
-        }
-
         if (!mInAir)
         {
             // Play Anim/Sound here
