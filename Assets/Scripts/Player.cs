@@ -36,9 +36,17 @@ public class Player : MonoBehaviour
     {
         float dt = Time.deltaTime;
 
+        Debug.Log("Collectables: " + mCollectablesCount);
+
+        if (mIsdead)
+        {
+            Respawn();
+        }
+
         HandleInput(dt);
     }
 
+    // Handle all the trigegr possible in the game
     void OnTriggerEnter2D(Collider2D col)
     {
         switch (col.tag)
@@ -56,8 +64,6 @@ public class Player : MonoBehaviour
                 mIsdead = true;
                 break;
         }
-
-
     }
 
     // Init all the variables that needs to be
@@ -112,7 +118,7 @@ public class Player : MonoBehaviour
     // Handle the respawn of the player
     private void Respawn()
     {
-
+        Application.LoadLevel("Prototype");
     }
 
     // Make the player go right
