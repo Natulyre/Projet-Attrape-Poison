@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     private const string COLLECTABLE = "Collectable";
     private const string BADY = "Bady";
     private const string SMOKE = "Smoke";
+    private const string DOOR = "Door";
+    private const string FLOOR = "Floor";
 
     // Public variables, designer stuff
     public float mSpeed;
@@ -46,22 +48,40 @@ public class Player : MonoBehaviour
         HandleInput(dt);
     }
 
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.collider.CompareTag(FLOOR))
+        {
+            // Play landing sound here, ONCE !
+        }
+    }
+
     // Handle all the trigegr possible in the game
     void OnTriggerEnter2D(Collider2D col)
     {
         switch (col.tag)
         {
             case COLLECTABLE:
+                // Collectible sound here
+                // DisplayCollectible(mCollectablesCount);
+                // col.gameObject.transform.parent.Vanish();
                 mCollectablesCount++;
                 break;
 
             case BADY:
-                mToxicity += mToxicityMultiplier;
+                // Hit sound and anim here
+                // DisplayToxicity(mToxicity);
+                // col.gameObject.transform.parent.Vanish();
                 ApplyToxicity();
                 break;
 
             case SMOKE:
+                // Cough sound and anim here
                 mIsdead = true;
+                break;
+
+            case DOOR:
+                // LaunchScreen(mCollectablesCount);
                 break;
         }
     }
@@ -90,6 +110,7 @@ public class Player : MonoBehaviour
 
         if (!mInAir)
         {
+            // Play Anim/Sound here
             mInAir = true;
             mBody.AddForce(new Vector2(0, mJumpForce), ForceMode2D.Impulse);
         }
@@ -124,6 +145,7 @@ public class Player : MonoBehaviour
     // Make the player go right
     private void MoveRight(float dt)
     {
+        // RunLeft anim here
         mBody.velocity += mRight * mCurrentSpeed * dt;
 
         if (mBody.velocity.x >= mMaxSpeed)
@@ -135,6 +157,7 @@ public class Player : MonoBehaviour
     // Make the player go left
     private void MoveLeft(float dt)
     {
+        // RunRight anim here
         mBody.velocity += mLeft * mCurrentSpeed * dt;
 
         if (mBody.velocity.x <= -mMaxSpeed)
@@ -146,6 +169,8 @@ public class Player : MonoBehaviour
     // Reduce the player speed according to the toxicity
     private void ApplyToxicity()
     {
+        mToxicity += mToxicityMultiplier;
+
         mCurrentSpeed -= mToxicity;
 
         if (mCurrentSpeed <= mMinSpeed)
