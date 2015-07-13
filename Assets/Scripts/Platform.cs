@@ -4,8 +4,8 @@ using System.Collections;
 public class Platform : MonoBehaviour 
 {
 
-	private float mRange;
-	private float mSpeed;
+	public float mRange;
+	public float mSpeed;
 	private float mOffset;
 
 	private Vector3 mMaxPosUp;
