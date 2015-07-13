@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     {
         float dt = Time.deltaTime;
 
-        Debug.Log("Collectables: " + mCollectablesCount);
+        //Debug.Log("Collectables: " + mCollectablesCount);
 
         if (mIsdead)
         {
@@ -48,10 +48,20 @@ public class Player : MonoBehaviour
         HandleInput(dt);
     }
 
+   // Debug Draw Lines
+   void OnCollisionStay2D(Collision2D col)
+   {
+       foreach (ContactPoint2D contact in col.contacts)
+       {
+           Debug.DrawRay(contact.point, contact.normal, Color.white);
+       }
+   }
+
     void OnCollisionEnter2D(Collision2D col)
     {
-        if(col.collider.CompareTag(FLOOR))
+        if (col.collider.CompareTag(FLOOR) && (col.contacts[0].normal.y == 1) || col.contacts[1].normal.y == 1)
         {
+            Debug.Log("Anims and shits here");
             // Play landing sound here, ONCE !
         }
     }
