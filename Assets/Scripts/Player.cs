@@ -38,6 +38,8 @@ public class Player : MonoBehaviour
     {
         float dt = Time.deltaTime;
 
+
+        Debug.Log(mInAir);
         //Debug.Log("Collectables: " + mCollectablesCount);
 
         if (mIsdead)
@@ -59,8 +61,7 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.collider.CompareTag(FLOOR) && 
-            (col.contacts[0].normal.y == 1) || col.contacts[1].normal.y == 1)
+        if (col.collider.CompareTag(FLOOR) && col.contacts[0].normal == Vector2.up)
         {
             mInAir = false;
             Debug.Log("Anims and shits here");
