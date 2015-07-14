@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Platform : MonoBehaviour 
 {
-
 	public float mRange;
 	public float mSpeed;
 	private float mOffset;
@@ -25,7 +24,6 @@ public class Platform : MonoBehaviour
 		mMaxPosUp.y += mRange;
 
 		mNewPos = mMaxPosUp;
-
 	}
 
 	void Update () 
@@ -35,11 +33,13 @@ public class Platform : MonoBehaviour
 
 	void Movement()
 	{
+		// Reaches Up, goes back down
 		if (transform.position.y >= mMaxPosUp.y - mOffset)
 		{
 			mNewPos = mMaxPosDown;
 		}
 
+		// Reaches Max down, goes back up
 		if (transform.position.y <= mMaxPosDown.y + mOffset)
 		{
 			mNewPos = mMaxPosUp;

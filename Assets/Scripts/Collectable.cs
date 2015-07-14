@@ -1,15 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Collectable : MonoBehaviour {
+public class Collectable : MonoBehaviour, IVanishable
+{
 
-	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 	
 	}
+
+	void Update () 
+	{
 	
-	// Update is called once per frame
-	void Update () {
+	}
+
+	public void Vanish()
+	{
 	
 	}
 }
