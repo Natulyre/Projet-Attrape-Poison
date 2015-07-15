@@ -13,16 +13,21 @@ public class Platform : MonoBehaviour
 
 	void Start () 
 	{
+		Init ();
+	}
+
+	void Init()
+	{
 		// Values
 		mRange = 6.0f;
 		mSpeed = 2.0f;
 		mOffset = 0.2f;
-
+		
 		// Start and Max Pos
 		mMaxPosDown = transform.position;
 		mMaxPosUp = transform.position;
 		mMaxPosUp.y += mRange;
-
+		
 		mNewPos = mMaxPosUp;
 	}
 

@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
         float dt = Time.deltaTime;
 
 
-        Debug.Log(mInAir);
+        //Debug.Log(mInAir);
         //Debug.Log("Collectables: " + mCollectablesCount);
 
         if (mIsdead)
