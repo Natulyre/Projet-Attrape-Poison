@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Obstacle : MonoBehaviour, IVanishable
 {
 	public float mSpeed;
+	public bool mHasCollided;
 	
 	// Cam
 	public Camera mCam;
@@ -40,6 +41,7 @@ public class Obstacle : MonoBehaviour, IVanishable
 	void Init()
 	{
 		mSpeed = -5.0f;
+		mHasCollided = false;
 		
 		// Cam
 		mCam = Camera.main;
@@ -91,6 +93,8 @@ public class Obstacle : MonoBehaviour, IVanishable
 			ManagePoints();
 
 			transform.position = mSpawnPoint;
+
+			Vanish();
 		}
 	}
 
@@ -99,8 +103,17 @@ public class Obstacle : MonoBehaviour, IVanishable
 		SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 		BoxCollider2D boxCollider2d = GetComponent<BoxCollider2D>();
 
-		spriteRenderer.enabled = false;
-		boxCollider2d.enabled = false;
+		if (mHasCollided)
+		{
+			spriteRenderer.enabled = true;
+			boxCollider2d.enabled = true;
+		}
+		else
+		{
+			spriteRenderer.enabled = false;
+			boxCollider2d.enabled = false;
+			mHasCollided = false;
+		}
 	}
 
 	private void Move()
