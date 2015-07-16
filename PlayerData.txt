@@ -1,0 +1,9 @@
+﻿Player data:
+	mSpeed: 20
+	mMaxSpeed: 3
+	mMinSpeed: 1.2
+	mJumpForce: 7
+	mToxicityMultiplier: hidden, not required
+	
+	Private edited:
+		mToxicity: 0.3f

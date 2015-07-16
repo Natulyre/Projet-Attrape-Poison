@@ -15,7 +15,8 @@ public class Player : MonoBehaviour
     public float mMaxSpeed;
     public float mMinSpeed;
     public float mJumpForce;
-    public float mToxicityMultiplier;
+    // public float mToxicityMultiplier;
+    
 
     // Private variables
     private float mToxicity;
@@ -79,6 +80,7 @@ public class Player : MonoBehaviour
                 // DisplayCollectible(mCollectablesCount);
                 // col.gameObject.transform.parent.Vanish();
                 mCollectablesCount++;
+                Debug.Log("Collectable picked up!");
                 break;
 
             case BADY:
@@ -103,7 +105,7 @@ public class Player : MonoBehaviour
     private void Init()
     {
         mBody = GetComponent<Rigidbody2D>();
-        mToxicity = 0.0f;
+        mToxicity = 0.3f;
         mCurrentSpeed = mSpeed;
         mCollectablesCount = 0;
         mInAir = false;
@@ -177,13 +179,14 @@ public class Player : MonoBehaviour
     // Reduce the player speed according to the toxicity
     private void ApplyToxicity()
     {
-        mToxicity += mToxicityMultiplier;
+        // mToxicity += mToxicityMultiplier;
+        // mCurrentSpeed -= mToxicity
+        mMaxSpeed -= mToxicity;
 
-        mCurrentSpeed -= mToxicity;
-
-        if (mCurrentSpeed <= mMinSpeed)
+        if (mMaxSpeed <= mMinSpeed)
         {
-            mCurrentSpeed = mMinSpeed;
+            mMaxSpeed = mMinSpeed;
+            // mCurrentSpeed = mMinSpeed;
         }
     }
 }
