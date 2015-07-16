@@ -6,10 +6,9 @@ public class Fallable : MonoBehaviour {
 
     public bool mIsGood;
     public float mSpeed;
-    public bool mHasCollided;
-
+ 
     // Cam
-    public Camera mCam;
+    private Camera mCam;
     private float mCamHeight;
     private float mCamWidth;
     private Vector3 mCamPos;
@@ -22,6 +21,8 @@ public class Fallable : MonoBehaviour {
     private Vector3 mSpawnPoint;
     private Vector3 mReSpawnPoint;
     private List<int> mSectionList = new List<int>();
+    SpriteRenderer spriteRenderer; 
+    BoxCollider2D boxCollider2d;
 
     public static System.Random mRnd;
 
@@ -35,15 +36,15 @@ public class Fallable : MonoBehaviour {
         UpdateCamPos();
 
         Move();
-
-        Spawn();
     }
 
     void Init()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        boxCollider2d = GetComponent<BoxCollider2D>();
+
         mIsGood = false;
         mSpeed = -5.0f;
-        mHasCollided = false;
 
         // Cam
         mCam = Camera.main;
@@ -65,6 +66,8 @@ public class Fallable : MonoBehaviour {
         ManagePoints();
 
         transform.position = mSpawnPoint;
+
+        Vanish();
     }
 
     void InitSectionList()
@@ -90,32 +93,20 @@ public class Fallable : MonoBehaviour {
     public void Spawn()
     {
         // If obstacle reaches the limit, it will get a new Spawn point and respawn at the top of the screen
-        if (transform.position.y <= mReSpawnPoint.y)
-        {
-            ManagePoints();
+        gameObject.SetActive(true);
+        spriteRenderer.enabled = true;
+        boxCollider2d.enabled = true;
 
-            transform.position = mSpawnPoint;
-
-            Vanish();
-        }
+        ManagePoints();
+        
+        transform.position = mSpawnPoint;
     }
 
     public void Vanish()
     {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        BoxCollider2D boxCollider2d = GetComponent<BoxCollider2D>();
-
-        if (mHasCollided)
-        {
-            spriteRenderer.enabled = true;
-            boxCollider2d.enabled = true;
-        }
-        else
-        {
-            spriteRenderer.enabled = false;
-            boxCollider2d.enabled = false;
-            mHasCollided = false;
-        }
+        spriteRenderer.enabled = false;
+        boxCollider2d.enabled = false;
+        gameObject.SetActive(false);
     }
 
     private void Move()
