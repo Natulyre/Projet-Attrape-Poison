@@ -22,14 +22,14 @@ public class Collectable : MonoBehaviour, IVanishable
 		
 		if (mHasCollided)
 		{
-			spriteRenderer.enabled = true;
-			boxCollider2d.enabled = true;
+			spriteRenderer.enabled = false;
+			boxCollider2d.enabled = false;
+
 		}
 		else
 		{
-			spriteRenderer.enabled = false;
-			boxCollider2d.enabled = false;
-			mHasCollided = false;
+			spriteRenderer.enabled = true;
+			boxCollider2d.enabled = true;
 		}
 	}
 }
