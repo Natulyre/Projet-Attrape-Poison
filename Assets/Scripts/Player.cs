@@ -88,6 +88,9 @@ public class Player : MonoBehaviour
                 // DisplayToxicity(mToxicity);
                 // col.gameObject.transform.parent.Vanish();
                 ApplyToxicity();
+                Collider2D temp = col.GetComponent<Collider2D>();
+                Fallable fal = temp.GetComponent<Fallable>();
+                fal.Vanish();
                 break;
 
             case SMOKE:
