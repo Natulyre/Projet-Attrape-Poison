@@ -17,7 +17,17 @@ public class Player : MonoBehaviour
     public float mJumpForce;
     // public float mToxicityMultiplier;
     
+	// Audio Clips
+	public AudioClip mJumpSound;
+	public AudioClip mLandSound;
+	public AudioClip mCollision;
+	public AudioClip mCough;
+	public AudioClip mGetCollectable;
 
+	// Audio Source variables
+	private AudioSource mSource;
+	private float mVol = 1.0f;
+	
     // Private variables
     private float mToxicity;
     private float mCurrentSpeed;
@@ -66,7 +76,9 @@ public class Player : MonoBehaviour
         {
             mInAir = false;
             Debug.Log("Anims and shits here");
-            // Play landing sound here, ONCE !
+            
+			//Play Sound
+			mSource.PlayOneShot(mLandSound, mVol);
         }
     }
 
@@ -76,7 +88,9 @@ public class Player : MonoBehaviour
         switch (col.tag)
         {
             case COLLECTABLE:
-                // Collectible sound here
+				// Play Sound
+				mSource.PlayOneShot(mGetCollectable, mVol);
+
                 // DisplayCollectible(mCollectablesCount);
                 // col.gameObject.transform.parent.Vanish();
                 mCollectablesCount++;
@@ -84,7 +98,9 @@ public class Player : MonoBehaviour
                 break;
 
             case BADY:
-                // Hit sound and anim here
+				// Play Sound
+				mSource.PlayOneShot(mCollision, mVol);
+
                 // DisplayToxicity(mToxicity);
                 // col.gameObject.transform.parent.Vanish();
                 ApplyToxicity();
@@ -94,7 +110,11 @@ public class Player : MonoBehaviour
                 break;
 
             case SMOKE:
-                // Cough sound and anim here
+				// Play Sound
+				mSource.PlayOneShot(mCough, mVol);  
+
+				// Play Cough Anim
+				
                 mIsdead = true;
                 break;
 
@@ -116,6 +136,8 @@ public class Player : MonoBehaviour
 
         mRight = Vector2.right;
         mLeft = -Vector2.right;
+
+		mSource = GetComponent<AudioSource>();
     }
 
     // Make the character jump
@@ -123,8 +145,12 @@ public class Player : MonoBehaviour
     {
         if (!mInAir)
         {
-            // Play Anim/Sound here
-            mInAir = true;
+            // Play Anim
+
+			// Play Sound
+			mSource.PlayOneShot(mJumpSound, mVol);
+            
+			mInAir = true;
             mBody.AddForce(new Vector2(0, mJumpForce), ForceMode2D.Impulse);
         }
     }
