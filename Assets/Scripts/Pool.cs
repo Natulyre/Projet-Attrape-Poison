@@ -3,25 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 
 /// <summary>
-/// Pool class acting as a container for our bullets
-/// Please note that this is to be used as a static instance for a common pool of bullets for both players
+/// 
+/// Pool class acting as a container for our Fallables
+/// 
 /// </summary>
 
 public class Pool : MonoBehaviour 
 {
+    // Adjustable variables
 	public int mNbOfFallable;
 	public Fallable mFallable;
 
+    // Private list
 	private List<Fallable> mFallables;
 	
-	// Initialisation of all of the bullets in the pool upon exe launch
+	// Initialisation of all of the fallables in the pool
 	private void Awake () 
 	{		
         mFallables = new List<Fallable>();
 
         for (int i = 0; i < mNbOfFallable; i++)
 		{
-            Debug.Log("Hello fallable");
 			GameObject obj = Instantiate(mFallable.gameObject);
             Fallable tempFallable = obj.GetComponent<Fallable>();
 			mFallables.Add(obj.GetComponent<Fallable>());

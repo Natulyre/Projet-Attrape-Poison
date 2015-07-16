@@ -36,6 +36,8 @@ public class Fallable : MonoBehaviour {
         UpdateCamPos();
 
         Move();
+
+        Respawn();
     }
 
     void Init()
@@ -90,9 +92,9 @@ public class Fallable : MonoBehaviour {
         }
     }
 
+    // Spawn the object, activate it
     public void Spawn()
     {
-        // If obstacle reaches the limit, it will get a new Spawn point and respawn at the top of the screen
         gameObject.SetActive(true);
         spriteRenderer.enabled = true;
         boxCollider2d.enabled = true;
@@ -102,6 +104,7 @@ public class Fallable : MonoBehaviour {
         transform.position = mSpawnPoint;
     }
 
+    // Vanish method from the IVanishable interface, desactivate the object
     public void Vanish()
     {
         spriteRenderer.enabled = false;
@@ -119,7 +122,7 @@ public class Fallable : MonoBehaviour {
         //mCamPos = mCam.ScreenToWorldPoint(mCam.transform.position);
         mCamPos = mCam.transform.position;
     }
-
+    
     private void ManagePoints()
     {
         // Get Beginning and End point of camera
@@ -129,7 +132,7 @@ public class Fallable : MonoBehaviour {
         int randomIndex = mRnd.Next(mSectionList.Count - 1);
 
         // Randomize and position in the selected section
-        mRandomX = Random.Range(startCamX, (mSectionList[randomIndex] * mSpawnSectionLength) - OFFSET_FROM_SCREEN_BORDERS);
+        mRandomX = Random.Range(randomIndex * mSpawnSectionLength, mSectionList[randomIndex] * mSpawnSectionLength - OFFSET_FROM_SCREEN_BORDERS);
 
         // Remove Section Chosen from list
         mSectionList.RemoveAt(randomIndex);
@@ -140,5 +143,14 @@ public class Fallable : MonoBehaviour {
         // Define the Spawn and Respawn points
         mSpawnPoint = new Vector3(mRandomX, mCamPos.y + mCamHeight, 0.0f);
         mReSpawnPoint = new Vector3(mRandomX, mCamPos.y - (mCamHeight * 2), 0.0f);
+    }
+
+    // Desactivate when out of screen
+    private void Respawn()
+    {
+        if(transform.position.y <= mReSpawnPoint.y)
+        {
+            Vanish();
+        }
     }
 }
