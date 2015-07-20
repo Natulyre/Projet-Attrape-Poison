@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Player : MonoBehaviour
@@ -11,6 +12,7 @@ public class Player : MonoBehaviour
     private const string FLOOR = "Floor";
 
     // Public variables, designer stuff
+    public Image lung;
     public float mSpeed;
     public float mMaxSpeed;
     public float mMinSpeed;
@@ -48,7 +50,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         float dt = Time.deltaTime;
-
 
         //Debug.Log(mInAir);
         //Debug.Log("Collectables: " + mCollectablesCount);
@@ -109,7 +110,9 @@ public class Player : MonoBehaviour
                 ApplyToxicity();
                 Collider2D temp = col.GetComponent<Collider2D>();
                 Fallable fal = temp.GetComponent<Fallable>();
-                fal.Vanish();
+                //fal.Vanish();
+
+                UpdateLung();
                 break;
 
             case SMOKE:
@@ -220,5 +223,10 @@ public class Player : MonoBehaviour
             mMaxSpeed = mMinSpeed;
             // mCurrentSpeed = mMinSpeed;
         }
+    }
+
+    private void UpdateLung()
+    {
+        lung.color = new Color(lung.color.r, lung.color.g, lung.color.b, mMaxSpeed);
     }
 }
