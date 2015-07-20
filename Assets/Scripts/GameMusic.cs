@@ -7,6 +7,8 @@ public class GameMusic : MonoBehaviour
 	private static GameMusic instance = null;
 	private static GameMusic Instance{ get { return instance; } }
 
+    private bool mSoundOn;
+
 	// Audio Source variables
 	private AudioSource mSource;
 	public float mVol = 1.0f;
@@ -28,6 +30,7 @@ public class GameMusic : MonoBehaviour
 	void Init()
 	{
 		mSource = GetComponent<AudioSource>();
+        mSoundOn = true;
 	}
 
 
@@ -54,5 +57,13 @@ public class GameMusic : MonoBehaviour
 	{
 		mSource.Stop ();
 	}
+
+    public void ToggleSound()
+    {
+        Debug.Log("CRISS !!!!");
+        mSoundOn = !mSoundOn;
+
+        AudioListener.volume = mSoundOn ? 1 : 0;
+    }
 
 }
