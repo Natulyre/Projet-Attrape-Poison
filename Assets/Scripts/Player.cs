@@ -38,14 +38,10 @@ public class Player : MonoBehaviour
     private Vector2 mRight;
     private Vector2 mLeft;
 
-	private Transform currentTarget;
-
     // Use this for initialization
     void Start()
     {
         Init();
-
-		currentTarget = null;
     }
 
     // Update is called once per frame
@@ -126,7 +122,7 @@ public class Player : MonoBehaviour
                 break;
 
             case DOOR:
-                // LaunchScreen(mCollectablesCount);
+				col.GetComponent<Door>().LaunchScreen(mCollectablesCount);
                 break;
         }
     }
