@@ -45,8 +45,14 @@ public class GameMusic : MonoBehaviour
 		DontDestroyOnLoad(this.gameObject);
 	}
 	
-	private void PlayMusic()
+	public void PlayMusic()
 	{
 		mSource.Play(0);
 	}
+
+	public void StopMusic()
+	{
+		mSource.Stop ();
+	}
+
 }
