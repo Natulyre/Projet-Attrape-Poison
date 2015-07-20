@@ -38,10 +38,14 @@ public class Player : MonoBehaviour
     private Vector2 mRight;
     private Vector2 mLeft;
 
+	private Transform currentTarget;
+
     // Use this for initialization
     void Start()
     {
         Init();
+
+		currentTarget = null;
     }
 
     // Update is called once per frame
@@ -92,7 +96,10 @@ public class Player : MonoBehaviour
 				mSource.PlayOneShot(mGetCollectable, mVol);
 
                 // DisplayCollectible(mCollectablesCount);
-                // col.gameObject.transform.parent.Vanish();
+                
+				// Make Collectable dissappear on Collision
+				col.GetComponent<Collectable>().Vanish();
+				
                 mCollectablesCount++;
                 Debug.Log("Collectable picked up!");
                 break;

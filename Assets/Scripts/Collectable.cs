@@ -18,7 +18,7 @@ public class Collectable : MonoBehaviour, IVanishable
 		SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 		BoxCollider2D boxCollider2d = GetComponent<BoxCollider2D>();
 
-		spriteRenderer.enabled = true;
-		boxCollider2d.enabled = true;
+		spriteRenderer.enabled = false;
+		boxCollider2d.enabled = false;
 	}
 }
