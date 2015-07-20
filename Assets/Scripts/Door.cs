@@ -15,6 +15,8 @@ public class Door : MonoBehaviour
 	private AudioSource mSource;
 	private float mVol = 1.0f;
 
+	private GameMusic gameMusic;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -39,13 +41,21 @@ public class Door : MonoBehaviour
 	{
 		if (p_nbCollectables <= 1)
 		{
-			Debug.Log ("Losing Screen");
+			// Launch Losing Screen
+			StopGameMusic ();
 			mSource.PlayOneShot(mLosing, mVol);
 		}
 		else if (p_nbCollectables >= 2)
 		{
-			Debug.Log ("Victory Screen");
+			// Launch Victory Screen
+			StopGameMusic ();
 			mSource.PlayOneShot(mVictory, mVol);
 		}
+	}
+
+	private void StopGameMusic()
+	{
+		GameObject gameMusic = GameObject.Find("GameMusic");
+		gameMusic.GetComponent<AudioSource>().Stop();
 	}
 }
