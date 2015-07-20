@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D mBody;
     private Vector2 mRight;
     private Vector2 mLeft;
+    private float mOpacity;
 
     // Use this for initialization
     void Start()
@@ -135,6 +136,7 @@ public class Player : MonoBehaviour
     {
         mBody = GetComponent<Rigidbody2D>();
         mToxicity = 0.3f;
+        mOpacity = 1;
         mCurrentSpeed = mSpeed;
         mCollectablesCount = 0;
         mInAir = false;
@@ -217,6 +219,7 @@ public class Player : MonoBehaviour
         // mToxicity += mToxicityMultiplier;
         // mCurrentSpeed -= mToxicity
         mMaxSpeed -= mToxicity;
+        mOpacity -= mToxicity;
 
         if (mMaxSpeed <= mMinSpeed)
         {
@@ -227,6 +230,6 @@ public class Player : MonoBehaviour
 
     private void UpdateLung()
     {
-        lung.color = new Color(lung.color.r, lung.color.g, lung.color.b, mMaxSpeed);
+        lung.color = new Color(lung.color.r, lung.color.g, lung.color.b, mOpacity);
     }
 }
