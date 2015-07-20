@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/UI/BUTTON_SOUND_DISABLED.png.meta
+guid: 90cfb2f1fedd213448f79f5f92d47d01
+timeCreated: 1437416214
+=======
 guid: df4992b1a6a349845bdf0aff992a3160
 timeCreated: 1437415882
+>>>>>>> a9023a5a527256b241c9726d7dfd1da8d99a16ea:Assets/UI/BUTTON_SOUND_DISABLED.png.meta
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName: {}
