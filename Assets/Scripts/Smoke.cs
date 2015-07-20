@@ -11,7 +11,7 @@ public class Smoke : MonoBehaviour
 	// Camera
 	public Camera mCam;
 	public float mCamHeight;
-	public Vector3 mCamPos;
+	public Vector3 mInitCamPos;
 
 	void Start () 
 	{
@@ -30,26 +30,20 @@ public class Smoke : MonoBehaviour
 		mCamHeight = mCam.orthographicSize;
 
 		// Get the camera's inital position
-		UpdateCamPos();
+		mInitCamPos = mCam.transform.position;
 
 		// Place Smoke as the bottom of the camera)
-		transform.position = new Vector3(mCamPos.x, mCamPos.y - (mCamHeight * 2), 0.0f);
+		transform.position = new Vector3(mInitCamPos.x, mInitCamPos.y - (mCamHeight * 1.6f), 0.0f);
 	}
 
 	void Update () 
 	{
-		UpdateCamPos();
 		Raise ();
-	}
-
-	private void UpdateCamPos()
-	{
-		mCamPos = mCam.transform.position;  
 	}
 	
 	private void Raise()
 	{
-		transform.position = new Vector3(mCamPos.x, mCamPos.y - (mCamHeight * 1.6f) + mDistanceMade, 0.0f);
+		transform.position = new Vector3(mInitCamPos.x, mInitCamPos.y - (mCamHeight * 1.6f) + mDistanceMade, 0.0f);
 
 		if (mIsRaising)
 		{
