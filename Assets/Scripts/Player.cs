@@ -92,7 +92,10 @@ public class Player : MonoBehaviour
 				mSource.PlayOneShot(mGetCollectable, mVol);
 
                 // DisplayCollectible(mCollectablesCount);
-                // col.gameObject.transform.parent.Vanish();
+                
+				// Make Collectable dissappear on Collision
+				col.GetComponent<Collectable>().Vanish();
+				
                 mCollectablesCount++;
                 Debug.Log("Collectable picked up!");
                 break;
@@ -119,7 +122,7 @@ public class Player : MonoBehaviour
                 break;
 
             case DOOR:
-                // LaunchScreen(mCollectablesCount);
+				col.GetComponent<Door>().LaunchScreen(mCollectablesCount);
                 break;
         }
     }
