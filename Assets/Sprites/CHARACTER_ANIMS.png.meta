@@ -1,0 +1,187 @@
+fileFormatVersion: 2
+guid: b08acb77ab9ecae4caa73bf1a80c9f4d
+timeCreated: 1437423351
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: CHARACTER_RUN1
+    21300002: CHARACTER_RUN2
+    21300004: CHARACTER_RUN3
+    21300006: CHARACTER_RUN4
+    21300008: CHARACTER_RUN5
+    21300010: CHARACTER_IDLE
+    21300012: CHARACTER_RUN6
+    21300014: CHARACTER_RUN7
+    21300016: CHARACTER_RUN8
+    21300018: CHARACTER_RUN9
+    21300020: CHARACTER_RUN10
+    21300022: CHARACTER_JUMP
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: CHARACTER_RUN1
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 225
+        width: 179
+        height: 229
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CHARACTER_RUN2
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 231
+        width: 160
+        height: 218
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CHARACTER_RUN3
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 234
+        width: 168
+        height: 213
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CHARACTER_RUN4
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 233
+        width: 154
+        height: 214
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CHARACTER_RUN5
+      rect:
+        serializedVersion: 2
+        x: 751
+        y: 239
+        width: 174
+        height: 207
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CHARACTER_IDLE
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 237
+        width: 136
+        height: 211
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CHARACTER_RUN6
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 7
+        width: 178
+        height: 203
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CHARACTER_RUN7
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 12
+        width: 146
+        height: 214
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CHARACTER_RUN8
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 6
+        width: 126
+        height: 203
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CHARACTER_RUN9
+      rect:
+        serializedVersion: 2
+        x: 578
+        y: 11
+        width: 155
+        height: 199
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CHARACTER_RUN10
+      rect:
+        serializedVersion: 2
+        x: 753
+        y: 18
+        width: 164
+        height: 194
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CHARACTER_JUMP
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 17
+        width: 162
+        height: 196
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
