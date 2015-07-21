@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     // All DEM consts!!
     private const string COLLECTABLE = "Collectable";
-    private const string BADY = "Bady";
+    private const string BADDY = "Baddy";
     private const string SMOKE = "Smoke";
     private const string DOOR = "Door";
     private const string FLOOR = "Floor";
@@ -17,7 +17,6 @@ public class Player : MonoBehaviour
     public float mMaxSpeed;
     public float mMinSpeed;
     public float mJumpForce;
-    // public float mToxicityMultiplier;
     
 	// Audio Clips
 	public AudioClip mJumpSound;
@@ -39,7 +38,18 @@ public class Player : MonoBehaviour
     private Rigidbody2D mBody;
     private Vector2 mRight;
     private Vector2 mLeft;
-    private float mOpacity;
+	private float mOpacity;
+	private int mCurrentDirection;
+	private GameMusic mGameMusic;
+
+	private const int STATE_IDLE = 0;
+	private const int STATE_RUN = 1;
+	private const int STATE_JUMP = 2;
+	
+	private const int DIRECTION_LEFT = 0;
+	private const int DIRECTION_RIGHT = 1;
+
+
 
     // Use this for initialization
     void Start()
@@ -50,18 +60,17 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float dt = Time.deltaTime;
-
-        //Debug.Log(mInAir);
-        //Debug.Log("Collectables: " + mCollectablesCount);
-
-        if (mIsdead)
-        {
-            Respawn();
-        }
-
-        HandleInput(dt);
+		CheckDeath ();
+        HandleInput();
     }
+
+	void CheckDeath()
+	{
+		if (mIsdead)
+		{
+			Respawn();
+		}
+	}
 
    // Debug Draw Lines
    void OnCollisionStay2D(Collision2D col)
@@ -77,7 +86,7 @@ public class Player : MonoBehaviour
         if (col.collider.CompareTag(FLOOR) && col.contacts[0].normal == Vector2.up)
         {
             mInAir = false;
-            Debug.Log("Anims and shits here");
+            //Debug.Log("Anims and shits here");
             
 			//Play Sound
 			mSource.PlayOneShot(mLandSound, mVol);
@@ -92,8 +101,6 @@ public class Player : MonoBehaviour
             case COLLECTABLE:
 				// Play Sound
 				mSource.PlayOneShot(mGetCollectable, mVol);
-
-                // DisplayCollectible(mCollectablesCount);
                 
 				// Make Collectable dissappear on Collision
 				col.GetComponent<Collectable>().Vanish();
@@ -102,16 +109,15 @@ public class Player : MonoBehaviour
                 Debug.Log("Collectable picked up!");
                 break;
 
-            case BADY:
+            case BADDY:
 				// Play Sound
 				mSource.PlayOneShot(mCollision, mVol);
 
                 // DisplayToxicity(mToxicity);
-                // col.gameObject.transform.parent.Vanish();
                 ApplyToxicity();
                 Collider2D temp = col.GetComponent<Collider2D>();
                 Fallable fal = temp.GetComponent<Fallable>();
-                //fal.Vanish();
+                fal.Vanish();
 
                 UpdateLung();
                 break;
@@ -140,7 +146,12 @@ public class Player : MonoBehaviour
         mCurrentSpeed = mSpeed;
         mCollectablesCount = 0;
         mInAir = false;
-        mIsdead = false;
+		mIsdead = false;
+		mCurrentDirection = DIRECTION_LEFT;
+		mGameMusic = GameObject.Find ("GameMusic").GetComponent<GameMusic>();
+		mGameMusic.PlayMusic(GameMusic.Songs.LEVEL);
+
+
 
         mRight = Vector2.right;
         mLeft = -Vector2.right;
@@ -154,6 +165,7 @@ public class Player : MonoBehaviour
         if (!mInAir)
         {
             // Play Anim
+			ChangeState(STATE_JUMP);
 
 			// Play Sound
 			mSource.PlayOneShot(mJumpSound, mVol);
@@ -164,7 +176,7 @@ public class Player : MonoBehaviour
     }
 
     // Handle all the input related things, jump, movement, etc...
-    private void HandleInput(float dt)
+    private void HandleInput()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -173,58 +185,62 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
-            MoveLeft(dt);
+            MoveLeft();
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            MoveRight(dt);
+            MoveRight();
         }
-
     }
 
     // Handle the respawn of the player
     private void Respawn()
     {
-        Application.LoadLevel("Prototype");
+		Application.LoadLevel(Application.loadedLevelName);
     }
 
     // Make the player go right
-    private void MoveRight(float dt)
+    private void MoveRight()
     {
-        // RunLeft anim here
-        mBody.velocity += mRight * mCurrentSpeed * dt;
+		//Update the player's direction
+		ChangeDirection(DIRECTION_LEFT);
+
+		Vector2 movement = mRight * mCurrentSpeed * Time.deltaTime;
+
+		mBody.velocity += movement;
 
         if (mBody.velocity.x >= mMaxSpeed)
         {
-            mBody.velocity -= mRight * mCurrentSpeed * dt;
+			mBody.velocity -= movement;
         }
     }
 
     // Make the player go left
-    private void MoveLeft(float dt)
-    {
-        // RunRight anim here
-        mBody.velocity += mLeft * mCurrentSpeed * dt;
+    private void MoveLeft()
+	{
+		//Update the player's direction
+		ChangeDirection(DIRECTION_RIGHT);
+
+		Vector2 movement = mLeft * mCurrentSpeed * Time.deltaTime;
+
+		mBody.velocity += movement;
 
         if (mBody.velocity.x <= -mMaxSpeed)
         {
-            mBody.velocity -= mLeft * mCurrentSpeed * dt;
+			mBody.velocity -= movement;
         }
     }
 
-    // Reduce the player speed according to the toxicity
+    // Reduce the player's max speed according to the toxicity
     private void ApplyToxicity()
     {
-        // mToxicity += mToxicityMultiplier;
-        // mCurrentSpeed -= mToxicity
         mMaxSpeed -= mToxicity;
         mOpacity -= mToxicity;
 
         if (mMaxSpeed <= mMinSpeed)
         {
             mMaxSpeed = mMinSpeed;
-            // mCurrentSpeed = mMinSpeed;
         }
     }
 
@@ -232,4 +248,40 @@ public class Player : MonoBehaviour
     {
         lung.color = new Color(lung.color.r, lung.color.g, lung.color.b, mOpacity);
     }
+
+	//Changes animation state
+	private void ChangeState(int state)
+	{
+		switch (state) 
+		{
+		case STATE_IDLE:
+			break;
+		case STATE_RUN:
+			break;
+		case STATE_JUMP:
+			break;
+		default:
+			break;
+		}
+	}
+
+	//Changes sprite's direction
+	private void ChangeDirection(int direction)
+	{
+		if (mCurrentDirection != direction) 
+		{
+			mCurrentDirection = direction;
+			switch (direction) 
+			{
+			case DIRECTION_LEFT:
+				transform.Rotate (0, -180, 0);
+				break;
+			case DIRECTION_RIGHT:
+				transform.Rotate (0, -180, 0);
+				break;
+			default:
+				break;
+			}
+		}
+	}
 }

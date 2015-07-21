@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
-/// <summary>
-/// 
-/// Camera Sript, really..the only thing its does it fix the x, and make the y follow the player.
-/// There is a damp time to mkae "Elasticity"
-/// 
-/// </summary>
+
+
+//Camera Script, really..the only thing its does it fix the x, and make the y follow the player.
+//There is a damp time to mkae "Elasticity"
+
 public class CameraController : MonoBehaviour
 {
     // Public variables
@@ -16,16 +15,14 @@ public class CameraController : MonoBehaviour
     private Camera mCamera;
     private Vector3 mVelocity = Vector3.zero;
 
-    // Use this for initialization
     void Start()
     {
         mCamera = Camera.main;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // If player non null, Set the camera with a delay set by the damp time to the y of the player 
+        // If player isn't null, Set the camera with a delay set by the damp time to the y of the player 
         if (mPlayer)
         {
             Vector3 point = mCamera.WorldToViewportPoint(mPlayer.position);

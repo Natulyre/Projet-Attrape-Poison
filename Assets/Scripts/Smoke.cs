@@ -5,13 +5,16 @@ public class Smoke : MonoBehaviour
 {
 	// Variables for Smoke
 	public float mSpeed;
-	public float mDistanceMade;
-	public bool mIsRaising;
+	private bool mIsRaising;
+	private float mDistanceMade;
 
 	// Camera
-	public Camera mCam;
-	public float mCamHeight;
-	public Vector3 mInitCamPos;
+	private Camera mCam;
+	private float mCamHeight;
+	private Vector3 mInitCamPos;
+
+	//Magic Number
+	private const float HEIGHT_FACTOR = 1.6f;
 
 	void Start () 
 	{
@@ -20,10 +23,10 @@ public class Smoke : MonoBehaviour
 
 	void Init()
 	{
-		// Values
-		mSpeed = 0.05f;
-		mDistanceMade = 0.0f;
+		
+		//Default values
 		mIsRaising = true;
+		mDistanceMade = 0;
 
 		// Cam
 		mCam = Camera.main;
@@ -32,8 +35,8 @@ public class Smoke : MonoBehaviour
 		// Get the camera's inital position
 		mInitCamPos = mCam.transform.position;
 
-		// Place Smoke as the bottom of the camera)
-		transform.position = new Vector3(mInitCamPos.x, mInitCamPos.y - (mCamHeight * 1.6f), 0.0f);
+		// Place Smoke at the bottom of the camera)
+		transform.position = new Vector3(mInitCamPos.x, mInitCamPos.y - (mCamHeight * HEIGHT_FACTOR), 0.0f);
 	}
 
 	void Update () 
@@ -43,8 +46,9 @@ public class Smoke : MonoBehaviour
 	
 	private void Raise()
 	{
-		transform.position = new Vector3(mInitCamPos.x, mInitCamPos.y - (mCamHeight * 1.6f) + mDistanceMade, 0.0f);
-
+		transform.position = (new Vector3 (mInitCamPos.x,
+		                                  mInitCamPos.y - (mCamHeight * HEIGHT_FACTOR) + mDistanceMade,
+		                                  0.0f));
 		if (mIsRaising)
 		{
 			mDistanceMade += mSpeed * Time.deltaTime;

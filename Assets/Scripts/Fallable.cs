@@ -4,27 +4,32 @@ using System.Collections.Generic;
 
 public class Fallable : MonoBehaviour {
 
-    public bool mIsGood;
-    public float mSpeed;
- 
-    // Cam
+	//If we ever wanted to add positive fallables
+    //public bool mIsGood; 
+
+	public float mSpeed;
+
+	//Spawning
+	public const int NUMBER_OF_SECTIONS = 3;
+	public const float OFFSET_FROM_SCREEN_BORDERS = 0.5f;
+	
+	// Handle actual spawning
+	private static System.Random mRnd;
+	private float mSpawnSectionLength;
+	private float mRandomX;
+	private Vector3 mSpawnPoint;
+	private Vector3 mReSpawnPoint;
+	private List<int> mSectionList = new List<int>();
+
+    // Camera
     private Camera mCam;
     private float mCamHeight;
     private float mCamWidth;
     private Vector3 mCamPos;
+		
+    public SpriteRenderer spriteRenderer; 
+    public BoxCollider2D boxCollider2d;
 
-    // Needed for Spawn
-    public const int NUMBER_OF_SECTIONS = 3;
-    public const float OFFSET_FROM_SCREEN_BORDERS = 0.5f;
-    private float mSpawnSectionLength;
-    private float mRandomX;
-    private Vector3 mSpawnPoint;
-    private Vector3 mReSpawnPoint;
-    private List<int> mSectionList = new List<int>();
-    SpriteRenderer spriteRenderer; 
-    BoxCollider2D boxCollider2d;
-
-    public static System.Random mRnd;
 
     void Start()
     {
@@ -34,9 +39,7 @@ public class Fallable : MonoBehaviour {
     void Update()
     {
         UpdateCamPos();
-
         Move();
-
         Respawn();
     }
 
@@ -44,11 +47,10 @@ public class Fallable : MonoBehaviour {
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider2d = GetComponent<BoxCollider2D>();
-
-        mIsGood = false;
+		
         mSpeed = -5.0f;
 
-        // Cam
+        // Camera
         mCam = Camera.main;
         mCamHeight = mCam.orthographicSize;
         mCamWidth = mCamHeight * mCam.aspect;
@@ -92,7 +94,7 @@ public class Fallable : MonoBehaviour {
         }
     }
 
-    // Spawn the object, activate it
+    // Spawn the object & activate it
     public void Spawn()
     {
         gameObject.SetActive(true);
@@ -132,7 +134,7 @@ public class Fallable : MonoBehaviour {
         int randomIndex = mRnd.Next(mSectionList.Count - 1);
 
         // Randomize and position in the selected section
-        mRandomX = Random.Range(randomIndex * mSpawnSectionLength, mSectionList[randomIndex] * mSpawnSectionLength - OFFSET_FROM_SCREEN_BORDERS);
+        mRandomX = Random.Range(startCamX + randomIndex * mSpawnSectionLength, mSectionList[randomIndex] * mSpawnSectionLength - OFFSET_FROM_SCREEN_BORDERS);
 
         // Remove Section Chosen from list
         mSectionList.RemoveAt(randomIndex);

@@ -6,9 +6,9 @@ public class Platform : MonoBehaviour
 	public float mRange;
 	public float mSpeed;
 	public float mMaxSpeed;
+
+
 	private float mOffset;
-
-
 
 	private Vector3 mMaxPosUp;
 	private Vector3 mMaxPosDown;
@@ -22,10 +22,7 @@ public class Platform : MonoBehaviour
 	void Init()
 	{
 		// Values
-		mRange = 6.0f;
 		mOffset = 0.2f;
-		mSpeed = 0.0f;
-		mMaxSpeed = 2.0f;
 		
 		// Start and Max Pos
 		mMaxPosDown = transform.position;
@@ -56,6 +53,7 @@ public class Platform : MonoBehaviour
 			mSpeed = 0.0f;
 		}
 
+		//As long as the speed hasn't reached maxSpeed
 		if (mSpeed < mMaxSpeed)
 		{
 			mSpeed += 0.05f;

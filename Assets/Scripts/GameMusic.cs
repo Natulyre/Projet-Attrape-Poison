@@ -3,28 +3,35 @@ using System.Collections;
 
 public class GameMusic : MonoBehaviour 
 {
-	// Instance
-	private static GameMusic instance = null;
-	private static GameMusic Instance{ get { return instance; } }
-
-    private bool mSoundOn;
+	public float mVol = 1.0f;
 
 	// Audio Source variables
 	private AudioSource mSource;
-	public float mVol = 1.0f;
+	private bool mSoundOn;
+	private Songs mCurrentSong;
 
-	// Use this for initialization
-	void Awake () 
+	private const string PATH = "Audio/Music/";
+	private const string MUSIC_LEVEL = "LevelMusicPlaceHolder";
+	private const string MUSIC_MENU = "MenuMusicPlaceHolder";
+
+	public enum Songs
 	{
-		Singleton();
-		Init();
-		PlayMusic();
+		LEVEL = 0,
+		MENU = 1
 	}
-	
-	// Update is called once per frame
-	void Update () 
+
+	private AudioClip[] clips;
+
+	void Awake()
+	{	
+		LoadResources();
+		DontDestroyOnLoad(this.gameObject);
+	}
+
+	void Start()
 	{
-	
+		Init();
+		PlayMusic(Songs.MENU);
 	}
 
 	void Init()
@@ -33,29 +40,28 @@ public class GameMusic : MonoBehaviour
         mSoundOn = true;
 	}
 
-
-	private void Singleton()
+	void LoadResources()
 	{
-		if (instance !=null && instance != this)
-		{
-			Destroy(this.gameObject);
-			return;
-		}
-		else
-		{
-			instance = this;
-		}
-		DontDestroyOnLoad(this.gameObject);
+		clips = new AudioClip[]{(AudioClip)Resources.Load (PATH + MUSIC_LEVEL),
+							    (AudioClip)Resources.Load (PATH + MUSIC_MENU)};
 	}
 	
-	public void PlayMusic()
+	public void PlayMusic(Songs song)
 	{
-		mSource.Play(0);
+		if (song != mCurrentSong) 
+		{
+			mCurrentSong = song;
+			mSource.clip = clips[(int)song];
+			StopMusic();
+		}
+		if (!mSource.isPlaying) 
+		{
+			mSource.Play(0);
+		}
 	}
-
 	public void StopMusic()
 	{
-		mSource.Stop ();
+		mSource.Stop();
 	}
 
     public void ToggleSound()
