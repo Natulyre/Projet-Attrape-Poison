@@ -71,10 +71,10 @@ public class GameFlow : MonoBehaviour {
 				Application.LoadLevel(Level_1);
 				break;
 			case (States.GAME_LEVEL_2):
-				Application.LoadLevel(Level_2);
+				Application.LoadLevel(Level_1);
 				break;
 			case (States.GAME_LEVEL_3):
-				Application.LoadLevel(Level_3);
+				Application.LoadLevel(Level_1);
 				break;
 			case (States.VICTORY):
 				Application.LoadLevel(Victory);
