@@ -75,67 +75,73 @@ public class Player : MonoBehaviour
    // Debug Draw Lines
    void OnCollisionStay2D(Collision2D col)
    {
+       mInAir = false;
        foreach (ContactPoint2D contact in col.contacts)
        {
            Debug.DrawRay(contact.point, contact.normal, Color.white);
        }
    }
 
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.collider.CompareTag(FLOOR) && col.contacts[0].normal == Vector2.up)
-        {
-            mInAir = false;
-            //Debug.Log("Anims and shits here");
-            
-			//Play Sound
-			mSource.PlayOneShot(mLandSound, mVol);
-        }
-    }
+   void OnCollisionEnter2D(Collision2D col)
+   {
+       if (col.collider.CompareTag(FLOOR) && col.contacts[0].normal == Vector2.up)
+       {
+           mInAir = false;
+           //Debug.Log("Anims and shits here");
+           
+		//Play Sound
+		mSource.PlayOneShot(mLandSound, mVol);
+       }
+   }
 
-    // Handle all the trigegr possible in the game
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        switch (col.tag)
-        {
-            case COLLECTABLE:
-				// Play Sound
-				mSource.PlayOneShot(mGetCollectable, mVol);
-                
-				// Make Collectable dissappear on Collision
-				col.GetComponent<Collectable>().Vanish();
-				
-                mCollectablesCount++;
-                Debug.Log("Collectable picked up!");
-                break;
+   void OnCollisionExit2D(Collision2D col)
+   {
+       mInAir = true;
+   }
 
-            case BADDY:
-				// Play Sound
-				mSource.PlayOneShot(mCollision, mVol);
+   // Handle all the trigegr possible in the game
+   void OnTriggerEnter2D(Collider2D col)
+   {
+       switch (col.tag)
+       {
+           case COLLECTABLE:
+			// Play Sound
+			mSource.PlayOneShot(mGetCollectable, mVol);
+               
+			// Make Collectable dissappear on Collision
+			col.GetComponent<Collectable>().Vanish();
+			
+               mCollectablesCount++;
+               Debug.Log("Collectable picked up!");
+               break;
 
-                // DisplayToxicity(mToxicity);
-                ApplyToxicity();
-                Collider2D temp = col.GetComponent<Collider2D>();
-                Fallable fal = temp.GetComponent<Fallable>();
-                fal.Vanish();
+           case BADDY:
+			// Play Sound
+			mSource.PlayOneShot(mCollision, mVol);
 
-                UpdateLung();
-                break;
+               // DisplayToxicity(mToxicity);
+               ApplyToxicity();
+               Collider2D temp = col.GetComponent<Collider2D>();
+               Fallable fal = temp.GetComponent<Fallable>();
+               fal.Vanish();
 
-            case SMOKE:
-				// Play Sound
-				mSource.PlayOneShot(mCough, mVol);  
+               UpdateLung();
+               break;
 
-				// Play Cough Anim
-				
-                mIsdead = true;
-                break;
+           case SMOKE:
+			// Play Sound
+			mSource.PlayOneShot(mCough, mVol);  
 
-            case DOOR:
-				col.GetComponent<Door>().LaunchScreen(mCollectablesCount);
-                break;
-        }
-    }
+			// Play Cough Anim
+			
+               mIsdead = true;
+               break;
+
+           case DOOR:
+			col.GetComponent<Door>().LaunchScreen(mCollectablesCount);
+               break;
+       }
+   }
 
     // Init all the variables that needs to be
     private void Init()

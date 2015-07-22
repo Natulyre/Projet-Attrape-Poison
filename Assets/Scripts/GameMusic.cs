@@ -7,7 +7,6 @@ public class GameMusic : MonoBehaviour
 
 	// Audio Source variables
 	private AudioSource mSource;
-	private bool mSoundOn;
 	private Songs mCurrentSong;
 
 	private const string PATH = "Audio/Music/";
@@ -37,7 +36,6 @@ public class GameMusic : MonoBehaviour
 	void Init()
 	{
 		mSource = GetComponent<AudioSource>();
-        mSoundOn = true;
 	}
 
 	void LoadResources()
@@ -59,17 +57,10 @@ public class GameMusic : MonoBehaviour
 			mSource.Play(0);
 		}
 	}
+
 	public void StopMusic()
 	{
 		mSource.Stop();
 	}
-
-    public void ToggleSound()
-    {
-        Debug.Log("CRISS !!!!");
-        mSoundOn = !mSoundOn;
-
-        AudioListener.volume = mSoundOn ? 1 : 0;
-    }
 
 }
