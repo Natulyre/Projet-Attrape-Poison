@@ -1,0 +1,85 @@
+Initialize engine version: 5.1.1f1 (2046fc06d4d8)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: AMD Radeon HD 6800 Series (ID=0x6739)
+    Vendor:   ATI
+    VRAM:     1010 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Propriétaire\Desktop\Unity\Analyse\Builds\PreAlpha_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Propriétaire\Desktop\Unity\Analyse\Builds\PreAlpha_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Propriétaire\Desktop\Unity\Analyse\Builds\PreAlpha_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Propriétaire\Desktop\Unity\Analyse\Builds\PreAlpha_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Propriétaire\Desktop\Unity\Analyse\Builds\PreAlpha_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Propriétaire\Desktop\Unity\Analyse\Builds\PreAlpha_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Propriétaire\Desktop\Unity\Analyse\Builds\PreAlpha_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\Propriétaire\Desktop\Unity\Analyse\Builds\PreAlpha_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\Propriétaire\Desktop\Unity\Analyse\Builds\PreAlpha_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading C:\Users\Propriétaire\Desktop\Unity\Analyse\Builds\PreAlpha_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+Platform assembly: C:\Users\Propriétaire\Desktop\Unity\Analyse\Builds\PreAlpha_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\Propriétaire\Desktop\Unity\Analyse\Builds\PreAlpha_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\Propriétaire\Desktop\Unity\Analyse\Builds\PreAlpha_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Propriétaire\Desktop\Unity\Analyse\Builds\PreAlpha_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.139 seconds
+desktop: 1920x1080 60Hz; virtual: 3840x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+Platform assembly: C:\Users\Propriétaire\Desktop\Unity\Analyse\Builds\PreAlpha_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Propriétaire\Desktop\Unity\Analyse\Builds\PreAlpha_Data\Managed\System.dll (this message is harmless)
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 4.590251 ms
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 312.
+Total: 0.263056 ms (FindLiveObjects: 0.020126 ms CreateObjectMapping: 0.018007 ms MarkObjects: 0.217507 ms  DeleteObjects: 0.006002 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.520110 ms
+
+Unloading 35 unused Assets to reduce memory usage. Loaded Objects now: 204.
+Total: 0.275768 ms (FindLiveObjects: 0.016948 ms CreateObjectMapping: 0.011299 ms MarkObjects: 0.186787 ms  DeleteObjects: 0.060379 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.430071 ms
+
+Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 313.
+Total: 0.261644 ms (FindLiveObjects: 0.021538 ms CreateObjectMapping: 0.015536 ms MarkObjects: 0.214682 ms  DeleteObjects: 0.009533 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.535293 ms
+
+Unloading 35 unused Assets to reduce memory usage. Loaded Objects now: 202.
+Total: 0.353096 ms (FindLiveObjects: 0.016948 ms CreateObjectMapping: 0.010945 ms MarkObjects: 0.248579 ms  DeleteObjects: 0.075915 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.405001 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 308.
+Total: 0.252463 ms (FindLiveObjects: 0.020479 ms CreateObjectMapping: 0.011652 ms MarkObjects: 0.215035 ms  DeleteObjects: 0.004590 ms)
+
+Collectable picked up!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.533528 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 308.
+Total: 0.248579 ms (FindLiveObjects: 0.020832 ms CreateObjectMapping: 0.012005 ms MarkObjects: 0.210445 ms  DeleteObjects: 0.004590 ms)
+
+Collectable picked up!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.548005 ms
+
+Unloading 35 unused Assets to reduce memory usage. Loaded Objects now: 202.
+Total: 0.284242 ms (FindLiveObjects: 0.016242 ms CreateObjectMapping: 0.011299 ms MarkObjects: 0.195262 ms  DeleteObjects: 0.060732 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.717491 ms
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 308.
+Total: 0.404295 ms (FindLiveObjects: 0.023304 ms CreateObjectMapping: 0.011299 ms MarkObjects: 0.363336 ms  DeleteObjects: 0.005649 ms)
+
