@@ -39,7 +39,8 @@ public class GameFlow : MonoBehaviour {
 		mLevelList.Add(States.GAME_LEVEL_1);
 		mLevelList.Add(States.GAME_LEVEL_2);
 		mLevelList.Add(States.GAME_LEVEL_3);
-		levelIndex = mRnd.Next(0, 2);
+	//	levelIndex = mRnd.Next(-1, 2); Only in comment for the alpha (also, with 0 the first level is never gotten, but works with -1)
+        levelIndex = -1;
 	}
 
 	public void NextLevel()
