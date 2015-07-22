@@ -7,7 +7,7 @@ public class GameFlow : MonoBehaviour {
 	private List<States> mLevelList;
 	
 	private const string Menu = "START_SCREEN"; 
-	private const string Level_1 = "LEVEL_TEST_ONE";
+	private const string Level_1 = "LEVEL_ONE";
 	private const string Level_2 = "LEVEL_TEST_TWO";
 	private const string Level_3 = "LEVEL_TEST_THREE";
 	private const string Victory = "VICTORY";
