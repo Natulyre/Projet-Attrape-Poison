@@ -9,7 +9,7 @@ public class GameFlow : MonoBehaviour {
 	
 	private const string Menu = "SCREEN_START"; 
 	private const string Level_1 = "LEVEL_ONE";
-	private const string Level_2 = "LEVEL_TEST_TWO";
+	private const string Level_2 = "LEVEL_TWO";
 	private const string Level_3 = "LEVEL_TEST_THREE";
 	private const string Loading = "SCREEN_LOADING";
 	private const string Victory = "SCREEN_VICTORY";
@@ -49,8 +49,7 @@ public class GameFlow : MonoBehaviour {
 		mLevelList.Add(States.GAME_LEVEL_1);
 		mLevelList.Add(States.GAME_LEVEL_2);
 		mLevelList.Add(States.GAME_LEVEL_3);
-	//	levelIndex = mRnd.Next(-1, 2); Only in comment for the alpha (also, with 0 the first level is never gotten, but works with -1)
-        mlevelIndex = -1;
+		mlevelIndex = mRnd.Next(-1, 2);
 	}
 
 	private void NextLevel()
@@ -109,13 +108,13 @@ public class GameFlow : MonoBehaviour {
 				Application.LoadLevel(Menu);
 				break;
 			case (States.GAME_LEVEL_1):
-				Application.LoadLevel(Level_1);
+				Application.LoadLevel(Level_2);
 				break;
 			case (States.GAME_LEVEL_2):
-				Application.LoadLevel(Level_1);
+				Application.LoadLevel(Level_2);
 				break;
 			case (States.GAME_LEVEL_3):
-				Application.LoadLevel(Level_1);
+				Application.LoadLevel(Level_2);
 				break;
 			case (States.VICTORY):
 				Application.LoadLevel(Victory);
