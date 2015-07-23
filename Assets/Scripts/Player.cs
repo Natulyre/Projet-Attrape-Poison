@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
 	private float mOpacity;
 	private int mCurrentDirection;
 	private GameMusic mGameMusic;
+	private Animator mAnimator;
 
 	private const int STATE_IDLE = 0;
 	private const int STATE_RUN = 1;
@@ -62,7 +63,8 @@ public class Player : MonoBehaviour
     void Update()
     {
 		CheckDeath ();
-        HandleInput();
+		HandleInput();
+		mAnimator.SetBool ("isJumping", mInAir);
     }
 
 	void CheckDeath()
@@ -83,7 +85,7 @@ public class Player : MonoBehaviour
        else
        {
            mInAir = false;
-       }
+		}
 
        foreach (ContactPoint2D contact in col.contacts)
        {
@@ -165,6 +167,7 @@ public class Player : MonoBehaviour
         mCanMove = true;
 		mCurrentDirection = DIRECTION_LEFT;
 		mGameMusic = GameObject.Find ("GameMusic").GetComponent<GameMusic>();
+		mAnimator = GetComponent<Animator>();
 		mGameMusic.PlayMusic(GameMusic.Songs.LEVEL);
 
         mRight = Vector2.right;
@@ -192,6 +195,13 @@ public class Player : MonoBehaviour
     // Handle all the input related things, jump, movement, etc...
     private void HandleInput()
     {
+		float inputX = Input.GetAxisRaw ("Horizontal");
+		bool moving = (Mathf.Abs (inputX)) > 0;
+
+		mAnimator.SetBool ("isMoving", moving);
+
+
+
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             Jump();
