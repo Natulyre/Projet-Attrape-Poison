@@ -105,8 +105,7 @@ public class Player : MonoBehaviour
            	mInAir = false;
            	//Debug.Log("Anims and shits here"); 
            
-
-			//Play Sound
+			//Play Sound if timer has reached his maximum
 			if (mTimer >= MAX_TIMER)
 			{
 				Debug.Log (mTimer);
@@ -120,6 +119,7 @@ public class Player : MonoBehaviour
    {
 		mInAir = true;
 
+		// Leaving Floor, starts/reset timer
 		if (col.collider.tag == FLOOR)
 		{	
 			mTimerOn = true;
@@ -157,13 +157,14 @@ public class Player : MonoBehaviour
                break;
 
            case SMOKE:
-			// Play Sound
-			mGameMusic.PlaySound(mCough);
-
-			// Play Cough Anim
-			
-               mIsdead = true;
-               break;
+				// Play Sound
+				if (!mIsdead)
+				{
+					// Play Cough Anim
+					mGameMusic.PlaySound(mCough);
+					mIsdead = true;
+				}
+               	break;
 
            case DOOR:
 				mIsOnDoor = true;
