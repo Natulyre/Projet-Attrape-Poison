@@ -25,9 +25,6 @@ public class Player : MonoBehaviour
 	public AudioClip mCough;
 	public AudioClip mGetCollectable;
 
-	// Audio Source variables
-	private AudioSource mSource;
-	private float mVol = 1.0f;
 	
     // Private variables
     private float mToxicity;
@@ -36,12 +33,15 @@ public class Player : MonoBehaviour
     private bool mInAir;
     private bool mIsdead;
     private bool mCanMove;
+	private bool mPressingAction;
+	private bool mIsOnDoor;
     private Rigidbody2D mBody;
     private Vector2 mRight;
     private Vector2 mLeft;
 	private float mOpacity;
 	private int mCurrentDirection;
 	private GameMusic mGameMusic;
+	private GameFlow mGameFlow;
 	private Animator mAnimator;
 
 	private const int STATE_IDLE = 0;
@@ -63,6 +63,7 @@ public class Player : MonoBehaviour
     void Update()
     {
 		CheckDeath ();
+		CheckExit ();
 		HandleInput();
 		mAnimator.SetBool ("isJumping", mInAir);
     }
@@ -101,7 +102,7 @@ public class Player : MonoBehaviour
            //Debug.Log("Anims and shits here");
            
 		//Play Sound
-		mSource.PlayOneShot(mLandSound, mVol);
+		mGameMusic.PlaySound(mLandSound);
        }
    }
 
@@ -117,7 +118,7 @@ public class Player : MonoBehaviour
        {
            case COLLECTABLE:
 			// Play Sound
-			mSource.PlayOneShot(mGetCollectable, mVol);
+			mGameMusic.PlaySound(mGetCollectable);
                
 			// Make Collectable dissappear on Collision
 			col.GetComponent<Collectable>().Vanish();
@@ -128,7 +129,7 @@ public class Player : MonoBehaviour
 
            case BADDY:
 			// Play Sound
-			mSource.PlayOneShot(mCollision, mVol);
+			mGameMusic.PlaySound(mCollision);
 
                // DisplayToxicity(mToxicity);
                ApplyToxicity();
@@ -141,7 +142,7 @@ public class Player : MonoBehaviour
 
            case SMOKE:
 			// Play Sound
-			mSource.PlayOneShot(mCough, mVol);  
+			mGameMusic.PlaySound(mCough);
 
 			// Play Cough Anim
 			
@@ -149,7 +150,7 @@ public class Player : MonoBehaviour
                break;
 
            case DOOR:
-			col.GetComponent<Door>().LaunchScreen(mCollectablesCount);
+				mIsOnDoor = true;
                break;
        }
    }
@@ -167,13 +168,12 @@ public class Player : MonoBehaviour
         mCanMove = true;
 		mCurrentDirection = DIRECTION_LEFT;
 		mGameMusic = GameObject.Find ("GameMusic").GetComponent<GameMusic>();
+		mGameFlow = GameObject.Find ("GameFlow").GetComponent<GameFlow>();
 		mAnimator = GetComponent<Animator>();
 		mGameMusic.PlayMusic(GameMusic.Songs.LEVEL);
 
         mRight = Vector2.right;
         mLeft = -Vector2.right;
-
-		mSource = GetComponent<AudioSource>();
     }
 
     // Make the character jump
@@ -185,7 +185,7 @@ public class Player : MonoBehaviour
 			ChangeState(STATE_JUMP);
 
 			// Play Sound
-			mSource.PlayOneShot(mJumpSound, mVol);
+			mGameMusic.PlaySound(mJumpSound);
             
 			mInAir = true;
             mBody.AddForce(new Vector2(0, mJumpForce), ForceMode2D.Impulse);
@@ -219,8 +219,17 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             MoveRight();
-        }
+		}
+		mPressingAction = Input.GetKey (KeyCode.Space);
     }
+
+	private void CheckExit()
+	{
+		if (mPressingAction && mIsOnDoor) 
+		{
+			mGameFlow.EndLevel(mCollectablesCount);
+		}
+	}
 
     // Handle the respawn of the player
     private void Respawn()

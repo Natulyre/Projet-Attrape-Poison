@@ -5,16 +5,19 @@ using System.Collections.Generic;
 public class GameFlow : MonoBehaviour {
 	private States mCurrentState;
 	private List<States> mLevelList;
+	private GameMusic mGameMusic;
 	
-	private const string Menu = "START_SCREEN"; 
+	private const string Menu = "SCREEN_START"; 
 	private const string Level_1 = "LEVEL_ONE";
 	private const string Level_2 = "LEVEL_TEST_TWO";
 	private const string Level_3 = "LEVEL_TEST_THREE";
-	private const string Victory = "VICTORY";
-	private const string Defeat = "DEFEAT";
+	private const string Loading = "SCREEN_LOADING";
+	private const string Victory = "SCREEN_VICTORY";
+	private const string Defeat = "SCREEN_DEFEAT";
 
 	private System.Random mRnd;
-	private int levelIndex;
+	private int mlevelIndex;
+	private int mCollectablesCount;
 
 	public enum States
 	{
@@ -26,6 +29,12 @@ public class GameFlow : MonoBehaviour {
 		DEFEAT = 5,
 	}
 
+	public enum Levels
+	{
+		RESTART,
+		NEXT
+	}
+
 	void Start () 
 	{
 		Init();
@@ -34,27 +43,58 @@ public class GameFlow : MonoBehaviour {
 
 	void Init()
 	{
+		mGameMusic = GameObject.Find ("GameMusic").GetComponent<GameMusic>();
 		mLevelList = new List<States> ();
 		mRnd = new System.Random ();
 		mLevelList.Add(States.GAME_LEVEL_1);
 		mLevelList.Add(States.GAME_LEVEL_2);
 		mLevelList.Add(States.GAME_LEVEL_3);
 	//	levelIndex = mRnd.Next(-1, 2); Only in comment for the alpha (also, with 0 the first level is never gotten, but works with -1)
-        levelIndex = -1;
+        mlevelIndex = -1;
 	}
 
-	public void NextLevel()
+	private void NextLevel()
 	{
-		if (++levelIndex >= 3) 
+		if (++mlevelIndex >= 3) 
 		{
-			levelIndex = 0;
+			mlevelIndex = 0;
 		}
-		ChangeLevel(mLevelList [levelIndex]);
+		ChangeLevel(mLevelList [mlevelIndex]);
 	}
 
-	public void RestartLevel()
+	public void EndLevel(int nbCollectables)
 	{
-		ChangeLevel(mLevelList [levelIndex]);
+		mCollectablesCount = nbCollectables;
+		if (nbCollectables > 2) {
+			mGameMusic.IntroduceMusic(GameMusic.Songs.VICTORY, GameMusic.Songs.MENU);
+			ChangeLevel(States.VICTORY);
+		}
+		else 
+		{
+			mGameMusic.IntroduceMusic(GameMusic.Songs.DEFEAT, GameMusic.Songs.MENU);
+			ChangeLevel(States.DEFEAT);
+		}
+	}
+
+	private void RestartLevel()
+	{
+		ChangeLevel(mLevelList [mlevelIndex]);
+	}
+
+	public void LoadLevel(GameFlow.Levels option)
+	{
+		switch (option) 
+		{
+		case Levels.NEXT:
+			Application.LoadLevel(Loading);
+			Invoke ("NextLevel", 3);
+			break;
+		case Levels.RESTART:
+			Application.LoadLevel(Loading);
+			Invoke ("RestartLevel", 3);
+			break;
+		}
+
 	}
 
 	public void ChangeLevel(States state)
@@ -87,6 +127,11 @@ public class GameFlow : MonoBehaviour {
 				break;
 			}
 		}
+	}
+
+	public int GetCollectableCount()
+	{
+		return mCollectablesCount;
 	}
 
 }

@@ -5,6 +5,7 @@ public class Buttons : MonoBehaviour {
 
 	GameFlow mGameFlow;
     GameMusic mGameMusic;
+	public AudioClip mButtonClick;
 
     private bool mSoundOn;
 
@@ -22,16 +23,19 @@ public class Buttons : MonoBehaviour {
 
 	public void RestartLevel()
 	{
-		mGameFlow.RestartLevel ();
+		mGameMusic.PlaySound(mButtonClick);
+		mGameFlow.LoadLevel (GameFlow.Levels.RESTART);
 	}
 
 	public void NextLevel()
 	{
-		mGameFlow.NextLevel ();
+		mGameMusic.PlaySound(mButtonClick);
+		mGameFlow.LoadLevel (GameFlow.Levels.NEXT);
 	}
 
     public void ToggleSound()
-    {
+	{
+		mGameMusic.PlaySound(mButtonClick);
         mSoundOn = !mSoundOn;
 
         AudioListener.volume = mSoundOn ? 1 : 0;
