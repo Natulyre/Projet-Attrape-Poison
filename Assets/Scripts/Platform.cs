@@ -32,7 +32,7 @@ public class Platform : MonoBehaviour
 		mNewPos = mMaxPosUp;
 	}
 
-	void Update () 
+	void FixedUpdate () 
 	{
 		Movement();	
 	}
@@ -58,6 +58,6 @@ public class Platform : MonoBehaviour
 		{
 			mSpeed += 0.05f;
 		}
-		transform.position = Vector3.Lerp(transform.position, mNewPos, mSpeed * Time.deltaTime);
+		transform.position = Vector3.Lerp(transform.position, mNewPos, mSpeed * Time.fixedDeltaTime);
 	}
 }
