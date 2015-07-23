@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     private const string SMOKE = "Smoke";
     private const string DOOR = "Door";
     private const string FLOOR = "Floor";
-	private const float MAX_TIMER = 4.0f;
+	private const float MAX_TIMER = 0.6f;
 
     // Public variables, designer stuff
     public Image lung;
@@ -342,10 +342,10 @@ public class Player : MonoBehaviour
 
 	private void Timer()
 	{
-		Debug.Log (mTimer);
+
 		if (mTimerOn)
 		{
-			mTimer += 0.1f;
+			mTimer += Time.deltaTime;
 		}
 	}
 }
