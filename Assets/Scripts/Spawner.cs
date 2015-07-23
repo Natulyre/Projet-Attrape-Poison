@@ -37,8 +37,8 @@ public class Spawner : MonoBehaviour
 			mTimer -= mSpawnTimer;
 
 			//Then retrieve an instance from the pool and spawn it
-        //    Fallable FallableToSpawn = mPool.GetInstance().GetComponent<Fallable>();
-         //   FallableToSpawn.Spawn();
+            Fallable FallableToSpawn = mPool.GetInstance().GetComponent<Fallable>();
+            FallableToSpawn.Spawn();
         }
     }
 }

@@ -121,7 +121,7 @@ public class Fallable : MonoBehaviour {
 
     private void UpdateCamPos()
     {
-        //mCamPos = mCam.ScreenToWorldPoint(mCam.transform.position);
+        mCamPos = mCam.ScreenToWorldPoint(mCam.transform.position);
         mCamPos = mCam.transform.position;
     }
     

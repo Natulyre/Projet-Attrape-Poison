@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     private int mCollectablesCount;
     private bool mInAir;
     private bool mIsdead;
+    private bool mCanMove;
     private Rigidbody2D mBody;
     private Vector2 mRight;
     private Vector2 mLeft;
@@ -75,7 +76,15 @@ public class Player : MonoBehaviour
    // Debug Draw Lines
    void OnCollisionStay2D(Collision2D col)
    {
-       mInAir = false;
+       if (!(col.contacts[0].normal == Vector2.up))
+       {
+           mInAir = true;
+       }
+       else
+       {
+           mInAir = false;
+       }
+
        foreach (ContactPoint2D contact in col.contacts)
        {
            Debug.DrawRay(contact.point, contact.normal, Color.white);
@@ -153,11 +162,10 @@ public class Player : MonoBehaviour
         mCollectablesCount = 0;
         mInAir = false;
 		mIsdead = false;
+        mCanMove = true;
 		mCurrentDirection = DIRECTION_LEFT;
 		mGameMusic = GameObject.Find ("GameMusic").GetComponent<GameMusic>();
 		mGameMusic.PlayMusic(GameMusic.Songs.LEVEL);
-
-
 
         mRight = Vector2.right;
         mLeft = -Vector2.right;
@@ -191,7 +199,11 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
-            MoveLeft();
+            if(mCanMove)
+            {
+                MoveLeft();
+            }
+            
         }
 
         if (Input.GetKey(KeyCode.D))
