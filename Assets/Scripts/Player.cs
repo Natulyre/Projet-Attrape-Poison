@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     private const string SMOKE = "Smoke";
     private const string DOOR = "Door";
     private const string FLOOR = "Floor";
+	private const float MAX_TIMER = 4.0f;
 
     // Public variables, designer stuff
     public Image lung;
@@ -43,6 +44,8 @@ public class Player : MonoBehaviour
 	private GameMusic mGameMusic;
 	private GameFlow mGameFlow;
 	private Animator mAnimator;
+	private bool mTimerOn;
+	private float mTimer;
 
 	private const int STATE_IDLE = 0;
 	private const int STATE_RUN = 1;
@@ -66,6 +69,7 @@ public class Player : MonoBehaviour
 		CheckExit ();
 		HandleInput();
 		mAnimator.SetBool ("isJumping", mInAir);
+		Timer ();
     }
 
 	void CheckDeath()
@@ -98,17 +102,29 @@ public class Player : MonoBehaviour
    {
        if (col.collider.CompareTag(FLOOR) && col.contacts[0].normal == Vector2.up)
        {
-           mInAir = false;
-           //Debug.Log("Anims and shits here");
+           	mInAir = false;
+           	//Debug.Log("Anims and shits here"); 
            
-		//Play Sound
-		mGameMusic.PlaySound(mLandSound);
+
+			//Play Sound
+			if (mTimer >= MAX_TIMER)
+			{
+				Debug.Log (mTimer);
+				mGameMusic.PlaySound(mLandSound);
+				mTimerOn = false;
+			}
        }
    }
 
    void OnCollisionExit2D(Collision2D col)
    {
-       mInAir = true;
+		mInAir = true;
+
+		if (col.collider.tag == FLOOR)
+		{	
+			mTimerOn = true;
+			mTimer = 0.0f;
+		}
    }
 
    // Handle all the trigegr possible in the game
@@ -171,6 +187,8 @@ public class Player : MonoBehaviour
 		mGameFlow = GameObject.Find ("GameFlow").GetComponent<GameFlow>();
 		mAnimator = GetComponent<Animator>();
 		mGameMusic.PlayMusic(GameMusic.Songs.LEVEL);
+		mTimerOn = true;
+		mTimer = MAX_TIMER;
 
         mRight = Vector2.right;
         mLeft = -Vector2.right;
@@ -319,6 +337,15 @@ public class Player : MonoBehaviour
 			default:
 				break;
 			}
+		}
+	}
+
+	private void Timer()
+	{
+		Debug.Log (mTimer);
+		if (mTimerOn)
+		{
+			mTimer += 0.1f;
 		}
 	}
 }
