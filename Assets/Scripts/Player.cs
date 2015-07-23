@@ -192,12 +192,12 @@ public class Player : MonoBehaviour
     // Handle all the input related things, jump, movement, etc...
     private void HandleInput()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             Jump();
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             if(mCanMove)
             {
@@ -206,7 +206,7 @@ public class Player : MonoBehaviour
             
         }
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             MoveRight();
         }
