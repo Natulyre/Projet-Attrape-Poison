@@ -1,9 +1,18 @@
 ﻿Player data:
 	mSpeed: 20
 	mMaxSpeed: 3
-	mMinSpeed: 1.2
+	mMinSpeed: 1.5
 	mJumpForce: 7
-	mToxicityMultiplier: hidden, not required
 	
 	Private edited:
 		mToxicity: 0.3f
+
+	Height: 6.5% of the screen, or 45px for 700px (screenheight)
+	Lenght: Proportional from the sprite resolution (meaning setting the height should also set the length to keep original proportion)
+
+
+Metrics:
+	Maximum length between platforms to succeed a jump at minimum speed: 80px
+	Maximum height to reach a platform: 110px
+		maximum recommended height for difficulty margin: 100px
+
