@@ -187,7 +187,7 @@ public class Player : MonoBehaviour
     private void Init()
     {
         mRenderer = GetComponent<SpriteRenderer>();
-        mRenderer.color = BASE_COLOR;
+    	mRenderer.color = BASE_COLOR;
         mBody = GetComponent<Rigidbody2D>();
         mToxicity = 0.3f;
         mOpacity = 1;
@@ -252,7 +252,13 @@ public class Player : MonoBehaviour
         {
             MoveRight();
 		}
+		if (Input.GetKeyDown(KeyCode.P))
+		{
+			mGameFlow.Pause();
+		}
 		mPressingAction = Input.GetKey (KeyCode.Space);
+
+
     }
 
 	private void CheckExit()
