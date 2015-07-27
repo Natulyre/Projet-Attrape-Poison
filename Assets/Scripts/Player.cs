@@ -18,10 +18,11 @@ public class Player : MonoBehaviour
     public Color ONE_COLOR;
     public Color TWO_COLOR;
     public Color THREE_COLOR; 
-    public Image lung;
-    public Image folder1;
-    public Image folder2;
-    public Image folder3;
+
+    public Image mLung;
+    public Image mFolder1;
+    public Image mFolder2;
+    public Image mFolder3;
     public float mSpeed;
     public float mMaxSpeed;
     public float mMinSpeed;
@@ -151,6 +152,7 @@ public class Player : MonoBehaviour
 			
                mCollectablesCount++;
                UpdateColor();
+               UpdateFolders();
                Debug.Log("Collectable picked up!");
                break;
 
@@ -203,6 +205,10 @@ public class Player : MonoBehaviour
 		mGameMusic.PlayMusic(GameMusic.Songs.LEVEL);
 		mTimerOn = true;
 		mTimer = MAX_TIMER;
+
+        mFolder1.enabled = true;
+        mFolder2.enabled = true;
+        mFolder3.enabled = true;
 
         mRight = Vector2.right;
         mLeft = -Vector2.right;
@@ -321,7 +327,7 @@ public class Player : MonoBehaviour
 
     private void UpdateLung()
     {
-        lung.color = new Color(lung.color.r, lung.color.g, lung.color.b, mOpacity);
+        mLung.color = new Color(mLung.color.r, mLung.color.g, mLung.color.b, mOpacity);
     }
 
 	//Changes animation state
@@ -360,15 +366,16 @@ public class Player : MonoBehaviour
 		}
 	}
 
+    // Very timer
 	private void Timer()
 	{
-
 		if (mTimerOn)
 		{
 			mTimer += Time.deltaTime;
 		}
 	}
 
+    // Update the character color when collectable picked
     private void UpdateColor()
     {
         switch(mCollectablesCount)
@@ -381,6 +388,23 @@ public class Player : MonoBehaviour
                 break;
             case 3:
                 mRenderer.color = THREE_COLOR;
+                break;
+        }
+    }
+
+    // Update the folders in the UI whenpicked
+    private void UpdateFolders()
+    {
+        switch (mCollectablesCount)
+        {
+            case 1:
+                mFolder1.color = new Color(mFolder1.color.r, mFolder1.color.g, mFolder1.color.b, 0);
+                break;
+            case 2:
+                mFolder2.color = new Color(mFolder2.color.r, mFolder2.color.g, mFolder2.color.b, 0);
+                break;
+            case 3:
+                mFolder3.color = new Color(mFolder3.color.r, mFolder3.color.g, mFolder3.color.b, 0);
                 break;
         }
     }
