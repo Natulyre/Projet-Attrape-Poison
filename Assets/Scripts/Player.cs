@@ -242,7 +242,13 @@ public class Player : MonoBehaviour
         {
             MoveRight();
 		}
+		if (Input.GetKey(KeyCode.P))
+		{
+			mGameFlow.Pause();
+		}
 		mPressingAction = Input.GetKey (KeyCode.Space);
+
+
     }
 
 	private void CheckExit()

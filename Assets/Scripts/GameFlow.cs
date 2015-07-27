@@ -18,6 +18,7 @@ public class GameFlow : MonoBehaviour {
 	private System.Random mRnd;
 	private int mlevelIndex;
 	private int mCollectablesCount;
+	private bool mIsPaused;
 
 	// Getter
 	public States GetState() { return mCurrentState; }
@@ -53,6 +54,7 @@ public class GameFlow : MonoBehaviour {
 		mLevelList.Add(States.GAME_LEVEL_2);
 		mLevelList.Add(States.GAME_LEVEL_3);
 		mlevelIndex = mRnd.Next(-1, 2);
+		mIsPaused = false;
 	}
 
 	private void NextLevel()
@@ -96,7 +98,6 @@ public class GameFlow : MonoBehaviour {
 			Invoke ("RestartLevel", 3);
 			break;
 		}
-
 	}
 
 	public void ChangeLevel(States state)
@@ -111,13 +112,13 @@ public class GameFlow : MonoBehaviour {
 				Application.LoadLevel(Menu);
 				break;
 			case (States.GAME_LEVEL_1):
-				Application.LoadLevel(Level_2);
+				Application.LoadLevel(Level_1);
 				break;
 			case (States.GAME_LEVEL_2):
 				Application.LoadLevel(Level_2);
 				break;
 			case (States.GAME_LEVEL_3):
-				Application.LoadLevel(Level_2);
+				Application.LoadLevel(Level_3);
 				break;
 			case (States.VICTORY):
 				Application.LoadLevel(Victory);
@@ -134,6 +135,21 @@ public class GameFlow : MonoBehaviour {
 	public int GetCollectableCount()
 	{
 		return mCollectablesCount;
+	}
+
+	public void Pause()
+	{
+		if (mIsPaused) {
+			mIsPaused = false;
+			Time.timeScale = 0;
+			Debug.Log ("Pause");
+		}
+		else
+		{
+			mIsPaused = true;
+			Time.timeScale = 1;
+			Debug.Log ("Unpause");
+		}
 	}
 
 }
