@@ -13,18 +13,18 @@ public class GameFlow : MonoBehaviour {
 	private const string LEVEL_2 = "LEVEL_TWO";
 	private const string LEVEL_3 = "LEVEL_THREE";
 	private const string LOADING = "SCREEN_LOADING";
-	private const string END = "SCREEN_END";
+    private const string END_LEVEL = "SCREEN_END";
 
     // Images
-    public Image WIN_1; 
-    public Image WIN_2; 
-    public Image WIN_3; 
-    public Image LOSE_1;
-    public Image LOSE_2;
-    public Image LOSE_3;
-    public Image PARTIAL_1; 
-    public Image PARTIAL_2; 
-    public Image PARTIAL_3; 
+    public Sprite WIN_1; 
+    public Sprite WIN_2; 
+    public Sprite WIN_3; 
+    public Sprite LOSE_1;
+    public Sprite LOSE_2;
+    public Sprite LOSE_3;
+    public Sprite PARTIAL_1; 
+    public Sprite PARTIAL_2; 
+    public Sprite PARTIAL_3; 
 
     // Local Images variables
     private Image winImage1;
@@ -51,8 +51,7 @@ public class GameFlow : MonoBehaviour {
 		GAME_LEVEL_1 = 1,
 		GAME_LEVEL_2 = 2,
 		GAME_LEVEL_3 = 3,
-		VICTORY = 4,
-		DEFEAT = 5,
+		END = 4
 	}
 
 	public enum Levels
@@ -79,6 +78,14 @@ public class GameFlow : MonoBehaviour {
 		mIsPaused = false;
 	}
 
+    void OnLevelWasLoaded()
+    {
+        if(Application.loadedLevelName == END_LEVEL)
+        {
+            SetEndBG();
+        }
+    }
+
 	private void NextLevel()
 	{
 		if (++mlevelIndex >= 3) 
@@ -93,12 +100,12 @@ public class GameFlow : MonoBehaviour {
 		mCollectablesCount = nbCollectables;
 		if (nbCollectables >= 2) {
 			mGameMusic.IntroduceMusic(GameMusic.Songs.VICTORY, GameMusic.Songs.MENU);
-			ChangeLevel(States.VICTORY);
+			ChangeLevel(States.END);
 		}
 		else 
 		{
 			mGameMusic.IntroduceMusic(GameMusic.Songs.DEFEAT, GameMusic.Songs.MENU);
-			ChangeLevel(States.DEFEAT);
+			ChangeLevel(States.END);
 		}
 	}
 
@@ -143,13 +150,8 @@ public class GameFlow : MonoBehaviour {
 			case (States.GAME_LEVEL_3):
 				Application.LoadLevel(LEVEL_3);
 				break;
-			case (States.VICTORY):
-                SetEndBG();
-				Application.LoadLevel(END);
-				break;
-			case (States.DEFEAT):
-                SetEndBG();
-				Application.LoadLevel(END);
+			case (States.END):
+                Application.LoadLevel(END_LEVEL);
 				break;
 			default:
 				break;
@@ -190,9 +192,65 @@ public class GameFlow : MonoBehaviour {
 
     private void SetEndBG()
     {
-        GameObject temp = GameObject.Find("BackGround");
+        GameObject temp = GameObject.Find("Background");
+        Debug.Log(temp);
+        //Image tempImage = temp.GetComponentInChildren<Image>();
         Image tempImage = temp.GetComponent<Image>();
-        tempImage = WIN_1;
+
+        switch(mlevelIndex)
+        {
+            case 0:
+                switch(mCollectablesCount)
+                {
+                    case 0 :
+                        tempImage.sprite = LOSE_1;
+                        break;
+                    case 1:
+                        tempImage.sprite = LOSE_1;
+                        break;
+                    case 2:
+                        tempImage.sprite = PARTIAL_1;
+                        break;
+                    case 3:
+                        tempImage.sprite = WIN_1;
+                        break;
+                }
+                break;
+            case 1:
+                switch (mCollectablesCount)
+                {
+                    case 0:
+                        tempImage.sprite = LOSE_2;
+                        break;
+                    case 1:
+                        tempImage.sprite = LOSE_2;
+                        break;
+                    case 2:
+                        tempImage.sprite = PARTIAL_2;
+                        break;
+                    case 3:
+                        tempImage.sprite = WIN_2;
+                        break;
+                }
+                break;
+            case 2:
+                switch (mCollectablesCount)
+                {
+                    case 0:
+                        tempImage.sprite = LOSE_3;
+                        break;
+                    case 1:
+                        tempImage.sprite = LOSE_3;
+                        break;
+                    case 2:
+                        tempImage.sprite = PARTIAL_3;
+                        break;
+                    case 3:
+                        tempImage.sprite = WIN_3;
+                        break;
+                }
+                break;
+        }
     }
 	
 	public bool GetPaused()
