@@ -76,11 +76,14 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		CheckDeath ();
-		CheckExit ();
-		HandleInput();
-		mAnimator.SetBool ("isJumping", mInAir);
-		Timer ();
+		if (!mGameFlow.GetPaused()) 
+		{
+			CheckDeath ();
+			CheckExit ();
+			HandleInput ();
+			mAnimator.SetBool ("isJumping", mInAir);
+			Timer ();
+		}
     }
 
 	void CheckDeath()
