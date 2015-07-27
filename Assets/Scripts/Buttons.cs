@@ -64,4 +64,10 @@ public class Buttons : MonoBehaviour {
 			}
 		}
 	}
+
+	public void Pause()
+	{
+		mGameMusic.PlaySound(mButtonClick);
+		mGameFlow.Pause ();
+	}
 }
