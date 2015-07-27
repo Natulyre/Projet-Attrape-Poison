@@ -140,13 +140,13 @@ public class GameFlow : MonoBehaviour {
 
 	public void Pause()
 	{
-		if (mIsPaused) {
-			mIsPaused = false;
+		if (!mIsPaused) {
+			mIsPaused = true;
 			Time.timeScale = 0;
 		}
 		else
 		{
-			mIsPaused = true;
+			mIsPaused = false;
 			Time.timeScale = 1;
 		}
 	}

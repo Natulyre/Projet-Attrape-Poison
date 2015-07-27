@@ -42,7 +42,6 @@ public class Player : MonoBehaviour
     private int mCollectablesCount;
     private bool mInAir;
     private bool mIsdead;
-    private bool mCanMove;
 	private bool mPressingAction;
 	private bool mIsOnDoor;
     private SpriteRenderer mRenderer;
@@ -75,15 +74,16 @@ public class Player : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-		if (!mGameFlow.GetPaused()) 
+	{
+		if (!mGameFlow.GetPaused ()) 
 		{
+			HandleInput ();
 			CheckDeath ();
 			CheckExit ();
-			HandleInput ();
 			mAnimator.SetBool ("isJumping", mInAir);
 			Timer ();
 		}
+		HandlePause();
     }
 
 	void CheckDeath()
@@ -122,7 +122,6 @@ public class Player : MonoBehaviour
 			//Play Sound if timer has reached his maximum
 			if (mTimer >= MAX_TIMER)
 			{
-				Debug.Log (mTimer);
 				mGameMusic.PlaySound(mLandSound);
 				mTimerOn = false;
 			}
@@ -156,7 +155,6 @@ public class Player : MonoBehaviour
                mCollectablesCount++;
                UpdateColor();
                UpdateFolders();
-               Debug.Log("Collectable picked up!");
                break;
 
            case BADDY:
@@ -200,7 +198,6 @@ public class Player : MonoBehaviour
         mCollectablesCount = 0;
         mInAir = false;
 		mIsdead = false;
-        mCanMove = true;
 		mCurrentDirection = DIRECTION_LEFT;
 		mGameMusic = GameObject.Find ("GameMusic").GetComponent<GameMusic>();
 		mGameFlow = GameObject.Find ("GameFlow").GetComponent<GameFlow>();
@@ -242,7 +239,6 @@ public class Player : MonoBehaviour
 		mAnimator.SetBool ("isMoving", moving);
 
 
-
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             Jump();
@@ -250,25 +246,25 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            if(mCanMove)
-            {
-                MoveLeft();
-            }
-            
+			MoveLeft();
         }
 
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             MoveRight();
 		}
-		if (Input.GetKeyDown(KeyCode.P))
-		{
-			mGameFlow.Pause();
-		}
 		mPressingAction = Input.GetKey (KeyCode.Space);
 
 
     }
+
+	private void HandlePause()
+	{
+		if (Input.GetKeyDown(KeyCode.P))
+		{
+			mGameFlow.Pause();
+		}
+	}
 
 	private void CheckExit()
 	{
@@ -352,6 +348,7 @@ public class Player : MonoBehaviour
 	//Changes sprite's direction
 	private void ChangeDirection(int direction)
 	{
+
 		if (mCurrentDirection != direction) 
 		{
 			mCurrentDirection = direction;
