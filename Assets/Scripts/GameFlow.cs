@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿    using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -10,7 +10,7 @@ public class GameFlow : MonoBehaviour {
 	private const string Menu = "SCREEN_START"; 
 	private const string Level_1 = "LEVEL_ONE";
 	private const string Level_2 = "LEVEL_TWO";
-	private const string Level_3 = "LEVEL_TEST_THREE";
+	private const string Level_3 = "LEVEL_THREE";
 	private const string Loading = "SCREEN_LOADING";
 	private const string Victory = "SCREEN_VICTORY";
 	private const string Defeat = "SCREEN_DEFEAT";
@@ -108,13 +108,13 @@ public class GameFlow : MonoBehaviour {
 				Application.LoadLevel(Menu);
 				break;
 			case (States.GAME_LEVEL_1):
-				Application.LoadLevel(Level_2);
-				break;
-			case (States.GAME_LEVEL_2):
-				Application.LoadLevel(Level_2);
-				break;
-			case (States.GAME_LEVEL_3):
-				Application.LoadLevel(Level_2);
+				Application.LoadLevel(Level_3);    // Part to edit to bring back the random levels
+				break;                             // Part to edit to bring back the random levels
+			case (States.GAME_LEVEL_2):            // Part to edit to bring back the random levels
+				Application.LoadLevel(Level_3);    // Part to edit to bring back the random levels
+				break;                             // Part to edit to bring back the random levels
+			case (States.GAME_LEVEL_3):            // Part to edit to bring back the random levels
+				Application.LoadLevel(Level_3);    // Part to edit to bring back the random levels
 				break;
 			case (States.VICTORY):
 				Application.LoadLevel(Victory);
