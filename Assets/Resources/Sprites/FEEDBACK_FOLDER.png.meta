@@ -1,0 +1,165 @@
+fileFormatVersion: 2
+guid: 15211cb2fb620814d839c65026916fa7
+timeCreated: 1438029297
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: FEEDBACK_FOLDER_0
+    21300002: FEEDBACK_FOLDER_1
+    21300004: FEEDBACK_FOLDER_2
+    21300006: FEEDBACK_FOLDER_3
+    21300008: FEEDBACK_FOLDER_4
+    21300010: FEEDBACK_FOLDER_5
+    21300012: FEEDBACK_FOLDER_6
+    21300014: FEEDBACK_FOLDER_7
+    21300016: FEEDBACK_FOLDER_8
+    21300018: FEEDBACK_FOLDER_9
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: FEEDBACK_FOLDER_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 65
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: FEEDBACK_FOLDER_1
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 65
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: FEEDBACK_FOLDER_2
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 65
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: FEEDBACK_FOLDER_3
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 65
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: FEEDBACK_FOLDER_4
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 65
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: FEEDBACK_FOLDER_5
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 7
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: FEEDBACK_FOLDER_6
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 7
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: FEEDBACK_FOLDER_7
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 7
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: FEEDBACK_FOLDER_8
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 8
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: FEEDBACK_FOLDER_9
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 9
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
