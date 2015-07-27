@@ -11,9 +11,17 @@ public class Player : MonoBehaviour
     private const string DOOR = "Door";
     private const string FLOOR = "Floor";
 	private const float MAX_TIMER = 0.6f;
+    private Color BASE_COLOR = Color.black;
+
 
     // Public variables, designer stuff
+    public Color ONE_COLOR;
+    public Color TWO_COLOR;
+    public Color THREE_COLOR; 
     public Image lung;
+    public Image folder1;
+    public Image folder2;
+    public Image folder3;
     public float mSpeed;
     public float mMaxSpeed;
     public float mMinSpeed;
@@ -36,6 +44,7 @@ public class Player : MonoBehaviour
     private bool mCanMove;
 	private bool mPressingAction;
 	private bool mIsOnDoor;
+    private SpriteRenderer mRenderer;
     private Rigidbody2D mBody;
     private Vector2 mRight;
     private Vector2 mLeft;
@@ -46,6 +55,7 @@ public class Player : MonoBehaviour
 	private Animator mAnimator;
 	private bool mTimerOn;
 	private float mTimer;
+    private Color mplayerColor;
 
 	private const int STATE_IDLE = 0;
 	private const int STATE_RUN = 1;
@@ -140,6 +150,7 @@ public class Player : MonoBehaviour
 			col.GetComponent<Collectable>().Vanish();
 			
                mCollectablesCount++;
+               UpdateColor();
                Debug.Log("Collectable picked up!");
                break;
 
@@ -175,6 +186,8 @@ public class Player : MonoBehaviour
     // Init all the variables that needs to be
     private void Init()
     {
+        mRenderer = GetComponent<SpriteRenderer>();
+    	mRenderer.color = BASE_COLOR;
         mBody = GetComponent<Rigidbody2D>();
         mToxicity = 0.3f;
         mOpacity = 1;
@@ -239,7 +252,13 @@ public class Player : MonoBehaviour
         {
             MoveRight();
 		}
+		if (Input.GetKeyDown(KeyCode.P))
+		{
+			mGameFlow.Pause();
+		}
 		mPressingAction = Input.GetKey (KeyCode.Space);
+
+
     }
 
 	private void CheckExit()
@@ -349,4 +368,20 @@ public class Player : MonoBehaviour
 			mTimer += Time.deltaTime;
 		}
 	}
+
+    private void UpdateColor()
+    {
+        switch(mCollectablesCount)
+        {
+            case 1:
+                mRenderer.color = ONE_COLOR;
+                break;
+            case 2:
+                mRenderer.color = TWO_COLOR;
+                break;
+            case 3:
+                mRenderer.color = THREE_COLOR;
+                break;
+        }
+    }
 }
