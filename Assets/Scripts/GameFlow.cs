@@ -7,13 +7,13 @@ public class GameFlow : MonoBehaviour {
 	private List<States> mLevelList;
 	private GameMusic mGameMusic;
 	
-	private const string Menu = "SCREEN_START"; 
-	private const string Level_1 = "LEVEL_ONE";
-	private const string Level_2 = "LEVEL_TWO";
-	private const string Level_3 = "LEVEL_THREE";
-	private const string Loading = "SCREEN_LOADING";
-	private const string Victory = "SCREEN_VICTORY";
-	private const string Defeat = "SCREEN_DEFEAT";
+	private const string MENU = "SCREEN_START"; 
+	private const string LEVEL_1 = "LEVEL_ONE";
+	private const string LEVEL_2 = "LEVEL_TWO";
+	private const string LEVEL_3 = "LEVEL_THREE";
+	private const string LOADING = "SCREEN_LOADING";
+	private const string VICTORY = "SCREEN_VICTORY";
+	private const string DEFEAT = "SCREEN_DEFEAT";
 
 	private System.Random mRnd;
 	private int mlevelIndex;
@@ -91,11 +91,11 @@ public class GameFlow : MonoBehaviour {
 		switch (option) 
 		{
 		case Levels.NEXT:
-			Application.LoadLevel(Loading);
+			Application.LoadLevel(LOADING);
 			Invoke ("NextLevel", 3);
 			break;
 		case Levels.RESTART:
-			Application.LoadLevel(Loading);
+			Application.LoadLevel(LOADING);
 			Invoke ("RestartLevel", 3);
 			break;
 		}
@@ -110,22 +110,22 @@ public class GameFlow : MonoBehaviour {
 			switch (state) 
 			{
 			case (States.MENU):
-				Application.LoadLevel(Menu);
+				Application.LoadLevel(MENU);
 				break;
 			case (States.GAME_LEVEL_1):
-				Application.LoadLevel(Level_1);
+				Application.LoadLevel(LEVEL_1);
 				break;
 			case (States.GAME_LEVEL_2):
-				Application.LoadLevel(Level_2);
+				Application.LoadLevel(LEVEL_2);
 				break;
 			case (States.GAME_LEVEL_3):
-				Application.LoadLevel(Level_3);
+				Application.LoadLevel(LEVEL_3);
 				break;
 			case (States.VICTORY):
-				Application.LoadLevel(Victory);
+				Application.LoadLevel(VICTORY);
 				break;
 			case (States.DEFEAT):
-				Application.LoadLevel(Defeat);
+				Application.LoadLevel(DEFEAT);
 				break;
 			default:
 				break;
