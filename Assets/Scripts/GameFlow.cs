@@ -10,7 +10,7 @@ public class GameFlow : MonoBehaviour {
 	private const string Menu = "SCREEN_START"; 
 	private const string Level_1 = "LEVEL_ONE";
 	private const string Level_2 = "LEVEL_TWO";
-	private const string Level_3 = "LEVEL_TWO";
+	private const string Level_3 = "LEVEL_THREE";
 	private const string Loading = "SCREEN_LOADING";
 	private const string Victory = "SCREEN_VICTORY";
 	private const string Defeat = "SCREEN_DEFEAT";
