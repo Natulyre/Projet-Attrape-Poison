@@ -67,7 +67,7 @@ public class GameFlow : MonoBehaviour {
 	public void EndLevel(int nbCollectables)
 	{
 		mCollectablesCount = nbCollectables;
-		if (nbCollectables > 2) {
+		if (nbCollectables >= 2) {
 			mGameMusic.IntroduceMusic(GameMusic.Songs.VICTORY, GameMusic.Songs.MENU);
 			ChangeLevel(States.VICTORY);
 		}
