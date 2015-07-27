@@ -11,9 +11,13 @@ public class Player : MonoBehaviour
     private const string DOOR = "Door";
     private const string FLOOR = "Floor";
 	private const float MAX_TIMER = 0.6f;
-    private const Color BASE_COLOR = Color.black;
+    private Color BASE_COLOR = Color.black;
+
 
     // Public variables, designer stuff
+    public Color ONE_COLOR;
+    public Color TWO_COLOR;
+    public Color THREE_COLOR; 
     public Image lung;
     public Image folder1;
     public Image folder2;
@@ -146,6 +150,7 @@ public class Player : MonoBehaviour
 			col.GetComponent<Collectable>().Vanish();
 			
                mCollectablesCount++;
+               UpdateColor();
                Debug.Log("Collectable picked up!");
                break;
 
@@ -360,6 +365,17 @@ public class Player : MonoBehaviour
 
     private void UpdateColor()
     {
-
+        switch(mCollectablesCount)
+        {
+            case 1:
+                mRenderer.color = ONE_COLOR;
+                break;
+            case 2:
+                mRenderer.color = TWO_COLOR;
+                break;
+            case 3:
+                mRenderer.color = THREE_COLOR;
+                break;
+        }
     }
 }
