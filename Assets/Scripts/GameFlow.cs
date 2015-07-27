@@ -162,4 +162,9 @@ public class GameFlow : MonoBehaviour {
 		ChangeLevel(States.MENU);
 		UnPause();
 	}
+
+	public bool GetPaused()
+	{
+		return mIsPaused;
+	}
 }
