@@ -3,15 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Fallable : MonoBehaviour {
-
-	//If we ever wanted to add positive fallables
-    //public bool mIsGood; 
-
+	
 	public float mSpeed;
 
 	//Spawning
 	public const int NUMBER_OF_SECTIONS = 3;
 	public const float OFFSET_FROM_SCREEN_BORDERS = 0.5f;
+	public const float OFFSET_FROM_SCREEN_HEIGHT = 4f;
+	private float mSpawnY;
 	
 	// Handle actual spawning
 	private static System.Random mRnd;
@@ -49,6 +48,7 @@ public class Fallable : MonoBehaviour {
         boxCollider2d = GetComponent<BoxCollider2D>();
 		
         mSpeed = -5.0f;
+		mSpawnY = mCamPos.y + mCamHeight + OFFSET_FROM_SCREEN_HEIGHT;
 
         // Camera
         mCam = Camera.main;
@@ -121,6 +121,10 @@ public class Fallable : MonoBehaviour {
 
     private void UpdateCamPos()
     {
+		if (mSpawnY < mCamPos.y + mCamHeight + OFFSET_FROM_SCREEN_HEIGHT) 
+		{
+			mSpawnY = mCamPos.y + mCamHeight + OFFSET_FROM_SCREEN_HEIGHT;
+		}
         mCamPos = mCam.ScreenToWorldPoint(mCam.transform.position);
         mCamPos = mCam.transform.position;
     }
@@ -143,7 +147,8 @@ public class Fallable : MonoBehaviour {
         CheckSectionList();
 
         // Define the Spawn and Respawn points
-        mSpawnPoint = new Vector3(mRandomX, mCamPos.y + mCamHeight, 0.0f);
+
+        mSpawnPoint = new Vector3(mRandomX, mSpawnY + OFFSET_FROM_SCREEN_HEIGHT, 0.0f);
         mReSpawnPoint = new Vector3(mRandomX, mCamPos.y - (mCamHeight * 2), 0.0f);
     }
 
