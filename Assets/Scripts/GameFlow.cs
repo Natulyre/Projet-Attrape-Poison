@@ -83,6 +83,7 @@ public class GameFlow : MonoBehaviour {
 	private void RestartLevel()
 	{
 		ChangeLevel(mLevelList [mlevelIndex]);
+		UnPause();
 	}
 
 	public void LoadLevel(GameFlow.Levels option)
@@ -150,4 +151,15 @@ public class GameFlow : MonoBehaviour {
 		}
 	}
 
+	public void UnPause()
+	{
+		mIsPaused = false;
+		Time.timeScale = 1;
+	}
+
+	public void RestartGame()
+	{
+		ChangeLevel(States.MENU);
+		UnPause();
+	}
 }
