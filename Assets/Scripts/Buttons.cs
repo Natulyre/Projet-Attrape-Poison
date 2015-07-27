@@ -64,4 +64,9 @@ public class Buttons : MonoBehaviour {
 			}
 		}
 	}
+
+	public void Pause()
+	{
+		mGameFlow.Pause ();
+	}
 }
