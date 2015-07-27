@@ -14,6 +14,9 @@ public class Player : MonoBehaviour
 
     // Public variables, designer stuff
     public Image lung;
+    public Image folder1;
+    public Image folder2;
+    public Image folder3;
     public float mSpeed;
     public float mMaxSpeed;
     public float mMinSpeed;
