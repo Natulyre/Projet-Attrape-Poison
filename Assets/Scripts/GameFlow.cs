@@ -161,20 +161,21 @@ public class GameFlow : MonoBehaviour {
 	{
 		return mCollectablesCount;
 	}
-
+	
+	
 	public void Pause()
 	{
-		if (mIsPaused) {
-			mIsPaused = false;
+		if (!mIsPaused) {
+			mIsPaused = true;
 			Time.timeScale = 0;
 		}
 		else
 		{
-			mIsPaused = true;
+			mIsPaused = false;
 			Time.timeScale = 1;
 		}
 	}
-
+	
 	public void UnPause()
 	{
 		mIsPaused = false;
@@ -193,4 +194,9 @@ public class GameFlow : MonoBehaviour {
         Image tempImage = temp.GetComponent<Image>();
         tempImage = WIN_1;
     }
+	
+	public bool GetPaused()
+	{
+		return mIsPaused;
+	}
 }
