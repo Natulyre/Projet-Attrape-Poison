@@ -19,6 +19,9 @@ public class GameFlow : MonoBehaviour {
 	private int mlevelIndex;
 	private int mCollectablesCount;
 
+	// Getter
+	public States GetState() { return mCurrentState; }
+
 	public enum States
 	{
 		MENU = 0,
@@ -64,7 +67,7 @@ public class GameFlow : MonoBehaviour {
 	public void EndLevel(int nbCollectables)
 	{
 		mCollectablesCount = nbCollectables;
-		if (nbCollectables > 2) {
+		if (nbCollectables >= 2) {
 			mGameMusic.IntroduceMusic(GameMusic.Songs.VICTORY, GameMusic.Songs.MENU);
 			ChangeLevel(States.VICTORY);
 		}

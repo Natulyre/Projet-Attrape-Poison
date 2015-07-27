@@ -14,6 +14,11 @@ public class Buttons : MonoBehaviour {
 		Init();
 	}
 
+	void Update()
+	{
+		KeyBoardInput();
+	}
+
 	void Init()
 	{
 		mGameFlow = GameObject.Find ("GameFlow").GetComponent<GameFlow>();
@@ -40,4 +45,23 @@ public class Buttons : MonoBehaviour {
 
         AudioListener.volume = mSoundOn ? 1 : 0;
     }
+
+	// Handles the Input by Keyboard
+	public void KeyBoardInput()
+	{
+		// Press Enter for Next Level
+		if (Input.GetKey(KeyCode.Return))
+		{
+			NextLevel ();
+		}
+
+		// Press Backspace
+		if (Input.GetKey(KeyCode.Backspace))
+		{
+			if (mGameFlow.GetState() != GameFlow.States.MENU)
+			{
+				RestartLevel ();
+			}
+		}
+	}
 }
