@@ -9,6 +9,6 @@ public class FPSDisplay : MonoBehaviour
 	private void Update()
 	{
 		mFPS = 1.0f / Time.deltaTime;
-		//mUIText.text = mFPS.ToString("#.00") + " FPS";
+		mUIText.text = mFPS.ToString("#.00") + " FPS";
 	}
 }
