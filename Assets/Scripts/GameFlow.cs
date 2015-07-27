@@ -19,6 +19,9 @@ public class GameFlow : MonoBehaviour {
 	private int mlevelIndex;
 	private int mCollectablesCount;
 
+	// Getter
+	public States GetState() { return mCurrentState; }
+
 	public enum States
 	{
 		MENU = 0,
