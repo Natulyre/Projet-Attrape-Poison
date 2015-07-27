@@ -142,13 +142,11 @@ public class GameFlow : MonoBehaviour {
 		if (mIsPaused) {
 			mIsPaused = false;
 			Time.timeScale = 0;
-			Debug.Log ("Pause");
 		}
 		else
 		{
 			mIsPaused = true;
 			Time.timeScale = 1;
-			Debug.Log ("Unpause");
 		}
 	}
 
