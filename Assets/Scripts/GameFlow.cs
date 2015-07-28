@@ -3,11 +3,12 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class GameFlow : MonoBehaviour {
+public class GameFlow : MonoBehaviour 
+{
 	private States mCurrentState;
 	private List<States> mLevelList;
 	private GameMusic mGameMusic;
-	
+
 	private const string MENU = "SCREEN_START"; 
 	private const string LEVEL_1 = "LEVEL_ONE";
 	private const string LEVEL_2 = "LEVEL_TWO";
