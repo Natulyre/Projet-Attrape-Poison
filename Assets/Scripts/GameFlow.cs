@@ -198,6 +198,8 @@ public class GameFlow : MonoBehaviour
         //Image tempImage = temp.GetComponentInChildren<Image>();
         Image tempImage = temp.GetComponent<Image>();
 
+		ShowHideReplayBtn();
+
         switch(mlevelIndex)
         {
             case 0:
@@ -253,6 +255,21 @@ public class GameFlow : MonoBehaviour
                 break;
         }
     }
+
+	// Hides the Replay Button if the Player found all 3 files
+	private void ShowHideReplayBtn()
+	{
+		GameObject tmpRestartBtn = GameObject.Find ("Restart Level");
+
+		if (mCollectablesCount == 3)
+		{
+			tmpRestartBtn.SetActive(false);
+		}
+		else
+		{
+			tmpRestartBtn.SetActive(true);
+		}
+	}
 	
 	public bool GetPaused()
 	{
