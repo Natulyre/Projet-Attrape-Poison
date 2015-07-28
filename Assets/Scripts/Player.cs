@@ -99,7 +99,15 @@ public class Player : MonoBehaviour
 	{
 		if (mIsdead)
 		{
-			Respawn();
+			mInAir = false;
+			mBody.velocity = new Vector2(mBody.velocity.x, 0);
+
+			// Fix smoke that is still going up
+
+			if (mAnimator.GetCurrentAnimatorStateInfo(0).IsName ("CHARACTER_DESTROY_IDLE"))
+			{
+				Respawn();
+			}
 		}
 	}
 
@@ -185,6 +193,7 @@ public class Player : MonoBehaviour
 				{
 					// Play Cough Anim
 					mGameMusic.PlaySound(mCough);
+					mAnimator.SetTrigger ("Death");
 					mIsdead = true;
 				}
                	break;

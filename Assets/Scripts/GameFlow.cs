@@ -52,7 +52,7 @@ public class GameFlow : MonoBehaviour
 		GAME_LEVEL_1 = 1,
 		GAME_LEVEL_2 = 2,
 		GAME_LEVEL_3 = 3,
-		END = 4
+		END = 4,
 	}
 
 	public enum Levels
