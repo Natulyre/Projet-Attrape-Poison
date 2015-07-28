@@ -53,6 +53,7 @@ public class Player : MonoBehaviour
     private Vector2 mRight;
     private Vector2 mLeft;
 	private float mOpacity;
+	private float mTmpOpacity;
 	private int mCurrentDirection;
 	private GameMusic mGameMusic;
 	private GameFlow mGameFlow;
@@ -158,7 +159,7 @@ public class Player : MonoBehaviour
 			mGameMusic.PlaySound(mGetCollectable);
                
 			// Make Collectable dissappear on Collision
-			col.GetComponent<Collectable>().Vanish();
+				col.GetComponent<Collectable>().Vanish();
 			
                mCollectablesCount++;
                UpdateColor();
@@ -203,6 +204,7 @@ public class Player : MonoBehaviour
         mToxicity = 0.3f;
 		mPrevToxicity = 0.0f;
         mOpacity = 1;
+		mTmpOpacity = mOpacity;
         mCurrentSpeed = mSpeed;
 		mTmpMaxSpeed = mMaxSpeed;
         mCollectablesCount = 0;
@@ -332,7 +334,7 @@ public class Player : MonoBehaviour
 			mTouchedBady = true;
 			mToxicTimerOn = true;
 			mMaxSpeed -= (mToxicity + mPrevToxicity);
-			mOpacity -= mToxicity;
+			mOpacity -= (mToxicity + mPrevToxicity);
 			mPrevToxicity += mToxicity;
 			
 			if (mMaxSpeed <= mMinSpeed)
@@ -348,6 +350,7 @@ public class Player : MonoBehaviour
 		if (mToxicTimerOn && mToxicTimer >= MAX_TOXIC_TIMER)
 		{	
 			mMaxSpeed = mTmpMaxSpeed;
+			mOpacity = mTmpOpacity;
 			mToxicTimerOn = false;
 			mTouchedBady = false;
 		}
