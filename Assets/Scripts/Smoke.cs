@@ -12,6 +12,7 @@ public class Smoke : MonoBehaviour
 	private Camera mCam;
 	private float mCamHeight;
 	private Vector3 mInitCamPos;
+	private GameFlow mGameFlow;
 
 	//Magic Number
 	private const float HEIGHT_FACTOR = 1.6f;
@@ -23,6 +24,7 @@ public class Smoke : MonoBehaviour
 
 	void Init()
 	{
+		mGameFlow = GameObject.Find ("GameFlow").GetComponent<GameFlow>();
 		
 		//Default values
 		mIsRaising = true;
@@ -41,17 +43,22 @@ public class Smoke : MonoBehaviour
 
 	void Update () 
 	{
-		Raise ();
+		if (!mGameFlow.GetSmokePaused()) 
+		{
+			
+			Raise ();
+		}
 	}
 	
 	private void Raise()
 	{
-		transform.position = (new Vector3 (mInitCamPos.x,
+		if (!mGameFlow.GetSmokePaused ()) {
+			transform.position = (new Vector3 (mInitCamPos.x,
 		                                  mInitCamPos.y - (mCamHeight * HEIGHT_FACTOR) + mDistanceMade,
 		                                  0.0f));
-		if (mIsRaising)
-		{
-			mDistanceMade += mSpeed * Time.deltaTime;
+			if (mIsRaising) {
+				mDistanceMade += mSpeed * Time.deltaTime;
+			}
 		}
 	}
 }

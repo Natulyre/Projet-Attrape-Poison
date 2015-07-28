@@ -82,7 +82,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
 	{
-		if (!mGameFlow.GetPaused ()) 
+		if (!mGameFlow.GetPaused () && !mGameFlow.GetPaused()) 
 		{
 			HandleInput ();
 			CheckDeath ();
@@ -99,8 +99,9 @@ public class Player : MonoBehaviour
 	{
 		if (mIsdead)
 		{
+			mGameFlow.PauseSmoke (true);
 			mInAir = false;
-			mBody.velocity = new Vector2(mBody.velocity.x, 0);
+			mBody.velocity = Vector2.zero;
 
 			// Fix smoke that is still going up
 
@@ -206,7 +207,9 @@ public class Player : MonoBehaviour
 
     // Init all the variables that needs to be
     private void Init()
-    {
+	{
+		mGameFlow = GameObject.Find ("GameFlow").GetComponent<GameFlow>();
+		mGameFlow.PauseSmoke (false);
         mRenderer = GetComponent<SpriteRenderer>();
     	mRenderer.color = BASE_COLOR;
         mBody = GetComponent<Rigidbody2D>();
@@ -221,7 +224,6 @@ public class Player : MonoBehaviour
 		mIsdead = false;
 		mCurrentDirection = DIRECTION_LEFT;
 		mGameMusic = GameObject.Find ("GameMusic").GetComponent<GameMusic>();
-		mGameFlow = GameObject.Find ("GameFlow").GetComponent<GameFlow>();
 		mAnimator = GetComponent<Animator>();
 		mGameMusic.PlayMusic(GameMusic.Songs.LEVEL);
 		mTimerOn = true;
@@ -299,7 +301,8 @@ public class Player : MonoBehaviour
 
     // Handle the respawn of the player
     private void Respawn()
-    {
+	{
+		mGameFlow.PauseSmoke (false);
 		Application.LoadLevel(Application.loadedLevelName);
     }
 

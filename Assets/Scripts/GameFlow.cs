@@ -8,6 +8,8 @@ public class GameFlow : MonoBehaviour
 	private States mCurrentState;
 	private List<States> mLevelList;
 	private GameMusic mGameMusic;
+	private Buttons mButtons;
+	private bool mSmokePaused;
 
 	private const string MENU = "SCREEN_START"; 
 	private const string LEVEL_1 = "LEVEL_ONE";
@@ -168,12 +170,16 @@ public class GameFlow : MonoBehaviour
 	
 	public void Pause()
 	{
+		mButtons = GameObject.Find ("SoundButton").GetComponent<Buttons>();
 		if (!mIsPaused) {
-			mIsPaused = true;
 			Time.timeScale = 0;
+			mButtons.ShowMenu(true);
+			mIsPaused = true;
+
 		}
 		else
 		{
+			mButtons.ShowMenu(false);
 			mIsPaused = false;
 			Time.timeScale = 1;
 		}
@@ -274,5 +280,15 @@ public class GameFlow : MonoBehaviour
 	public bool GetPaused()
 	{
 		return mIsPaused;
+	}
+
+	public void PauseSmoke(bool toggle)
+	{
+		mSmokePaused = toggle;
+	}
+
+	public bool GetSmokePaused()
+	{
+		return mSmokePaused;
 	}
 }

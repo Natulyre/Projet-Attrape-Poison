@@ -6,6 +6,7 @@ public class Buttons : MonoBehaviour {
 	GameFlow mGameFlow;
     GameMusic mGameMusic;
 	public AudioClip mButtonClick;
+	public GameObject mPauseMenu;
 
     private bool mSoundOn;
 
@@ -28,14 +29,31 @@ public class Buttons : MonoBehaviour {
 
 	public void RestartLevel()
 	{
+		mGameFlow.UnPause ();
 		mGameMusic.PlaySound(mButtonClick);
 		mGameFlow.LoadLevel (GameFlow.Levels.RESTART);
+	}
+
+	public void RestartLevelQuickly()
+	{
+		mGameMusic.PlaySound(mButtonClick);
+		mGameFlow.RestartGame();
 	}
 
 	public void NextLevel()
 	{
 		mGameMusic.PlaySound(mButtonClick);
 		mGameFlow.LoadLevel (GameFlow.Levels.NEXT);
+	}
+
+	public void Home()
+	{
+		mGameMusic.PlaySound(mButtonClick);
+		mGameFlow.RestartGame ();
+		GameObject mDog = GameObject.Find ("GameFlow");
+		GameObject mCat = GameObject.Find ("GameMusic");
+		Destroy(mDog);
+		Destroy(mCat);
 	}
 
     public void ToggleSound()
@@ -69,5 +87,10 @@ public class Buttons : MonoBehaviour {
 	{
 		mGameMusic.PlaySound(mButtonClick);
 		mGameFlow.Pause ();
+	}
+
+	public void ShowMenu(bool toggle)
+	{
+		mPauseMenu.SetActive (toggle);
 	}
 }
