@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     private const string DOOR = "Door";
     private const string FLOOR = "Floor";
 	private const float MAX_TIMER = 0.6f;
+	private const float MAX_TOXIC_TIMER = 3.0f;
     private Color BASE_COLOR = Color.black;
 
 
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour
     public Image mFolder3;
     public float mSpeed;
     public float mMaxSpeed;
+	public float mTmpMaxSpeed;
     public float mMinSpeed;
     public float mJumpForce;
     
@@ -38,6 +40,8 @@ public class Player : MonoBehaviour
 	
     // Private variables
     private float mToxicity;
+	private float mPrevToxicity;
+	private bool mTouchedBady;
     private float mCurrentSpeed;
     private int mCollectablesCount;
     private bool mInAir;
@@ -55,6 +59,8 @@ public class Player : MonoBehaviour
 	private Animator mAnimator;
 	private bool mTimerOn;
 	private float mTimer;
+	private bool mToxicTimerOn;
+	private float mToxicTimer;
     private Color mplayerColor;
 
 	private const int STATE_IDLE = 0;
@@ -82,6 +88,8 @@ public class Player : MonoBehaviour
 			CheckExit ();
 			mAnimator.SetBool ("isJumping", mInAir);
 			Timer ();
+			ToxicTimer();
+			VeriftyToxicity();
 		}
 		HandlePause();
     }
@@ -158,8 +166,8 @@ public class Player : MonoBehaviour
                break;
 
            case BADDY:
-			// Play Sound
-			mGameMusic.PlaySound(mCollision);
+				// Play Sound
+				mGameMusic.PlaySound(mCollision);
 
                // DisplayToxicity(mToxicity);
                ApplyToxicity();
@@ -193,8 +201,10 @@ public class Player : MonoBehaviour
     	mRenderer.color = BASE_COLOR;
         mBody = GetComponent<Rigidbody2D>();
         mToxicity = 0.3f;
+		mPrevToxicity = 0.0f;
         mOpacity = 1;
         mCurrentSpeed = mSpeed;
+		mTmpMaxSpeed = mMaxSpeed;
         mCollectablesCount = 0;
         mInAir = false;
 		mIsdead = false;
@@ -205,6 +215,8 @@ public class Player : MonoBehaviour
 		mGameMusic.PlayMusic(GameMusic.Songs.LEVEL);
 		mTimerOn = true;
 		mTimer = MAX_TIMER;
+		mToxicTimerOn = false;
+		mToxicTimer = 0.0f;
 
         mFolder1.enabled = true;
         mFolder2.enabled = true;
@@ -315,14 +327,31 @@ public class Player : MonoBehaviour
     // Reduce the player's max speed according to the toxicity
     private void ApplyToxicity()
     {
-        mMaxSpeed -= mToxicity;
-        mOpacity -= mToxicity;
-
-        if (mMaxSpeed <= mMinSpeed)
-        {
-            mMaxSpeed = mMinSpeed;
-        }
+		if (!mTouchedBady)
+		{
+			mTouchedBady = true;
+			mToxicTimerOn = true;
+			mMaxSpeed -= (mToxicity + mPrevToxicity);
+			mOpacity -= mToxicity;
+			mPrevToxicity += mToxicity;
+			
+			if (mMaxSpeed <= mMinSpeed)
+			{
+				mMaxSpeed = mMinSpeed;
+			}
+		}
     }
+
+	// Verifies if Toxiciy has to be applied or not
+	private void VeriftyToxicity()
+	{
+		if (mToxicTimerOn && mToxicTimer >= MAX_TOXIC_TIMER)
+		{	
+			mMaxSpeed = mTmpMaxSpeed;
+			mToxicTimerOn = false;
+			mTouchedBady = false;
+		}
+	}
 
     private void UpdateLung()
     {
@@ -372,6 +401,19 @@ public class Player : MonoBehaviour
 		if (mTimerOn)
 		{
 			mTimer += Time.deltaTime;
+		}
+	}
+
+	// Very toxic timer
+	private void ToxicTimer()
+	{
+		if (mToxicTimerOn)
+		{
+			mToxicTimer += Time.deltaTime;
+		}
+		else
+		{
+			mToxicTimer = 0.0f;
 		}
 	}
 
