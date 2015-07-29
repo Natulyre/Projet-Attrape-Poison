@@ -23,6 +23,7 @@ public class Collectable : MonoBehaviour, IVanishable
 
 		mSpriteRenderer = GetComponent<SpriteRenderer>();
 		mBoxCollider2d = GetComponent<BoxCollider2D>();
+		mBoxCollider2d.enabled = false;
 	}
 
 	public void Disable()
@@ -30,7 +31,6 @@ public class Collectable : MonoBehaviour, IVanishable
 		if(mAnimatorTest.GetCurrentAnimatorStateInfo(0).IsName("IDLE_VANISH"))
 		{	
 			mSpriteRenderer.enabled = false;
-			mBoxCollider2d.enabled = false;
 		}
 	}
 }
