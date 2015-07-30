@@ -60,7 +60,8 @@ public class GameFlow : MonoBehaviour
 	public enum Levels
 	{
 		RESTART,
-		NEXT
+		NEXT,
+		QUICKRESTART
 	}
 
 	void Start () 
@@ -129,6 +130,9 @@ public class GameFlow : MonoBehaviour
 		case Levels.RESTART:
 			Application.LoadLevel(LOADING);
 			Invoke ("RestartLevel", 3);
+			break;
+		case Levels.QUICKRESTART:
+			Application.LoadLevel(Application.loadedLevelName);
 			break;
 		}
 	}

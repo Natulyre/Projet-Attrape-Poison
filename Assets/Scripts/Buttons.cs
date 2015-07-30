@@ -36,8 +36,9 @@ public class Buttons : MonoBehaviour {
 
 	public void RestartLevelQuickly()
 	{
+		mGameFlow.UnPause ();
 		mGameMusic.PlaySound(mButtonClick);
-		mGameFlow.RestartGame();
+		mGameFlow.LoadLevel (GameFlow.Levels.QUICKRESTART);
 	}
 
 	public void NextLevel()
